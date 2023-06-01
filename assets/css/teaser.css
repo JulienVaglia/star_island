@@ -1,0 +1,145 @@
+*{
+    margin: 0;
+}
+
+@font-face {
+    font-family: 'Iceland';
+    src: url('../fonts/Iceland-Regular.ttf') format('truetype');
+}
+
+body {
+    
+
+}
+
+#timer {
+    width: 100vw;
+    position: absolute;
+    top: 20vh;
+    padding-top: 40vh;
+    color: white;
+    display: flex;
+    justify-content: center;
+    font-size: 100px;
+    font-family: 'Iceland', cursive;
+}
+
+main {
+    width: 100vw;
+    height: 100vh;
+    background: no-repeat url("../img/Perso1-removebg-preview.png");
+    background-color: black;
+    background-size: contain;
+    background-position:top 10vh left 15vw;
+
+}
+
+.barre_liens {
+    width: 100vw;
+    position: absolute;
+    bottom: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.barre_liens ul {
+    border: 1px solid blue;
+    display: flex;
+}
+
+li {
+    list-style-type: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* -------------------------------------------- */
+/* 
+.personnage1{
+    position: absolute;
+    width: 45vw;
+    height: 98vh;
+    left: 15vw;
+    display: flex;
+    justify-content: center;
+}
+
+#timer {
+    position: absolute;
+    width: 95vw;
+    padding-top: 40vh;
+    color: white;
+    display: flex;
+    justify-content: center;
+    font-size: 100px;
+    font-family: 'Iceland', cursive;
+}
+
+.discordFixe{
+    position: absolute;
+    width: 100vw;
+    display: flex;
+    bottom: 40px;
+    justify-content: center;
+
+}
+
+#barre_liens{
+    width: 98vw;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    bottom: 10px;
+    margin-bottom: 15px;
+
+}
+
+#barre_liens li{
+    margin: 7px;
+    vertical-align: center;
+}
+
+.space1{
+    padding-right: 50px;
+}
+
+.space2{
+    padding-left: 50px;
+}
+
+.scale-in-hor-center:hover{
+    display: flex;
+    transition: ;
+    animation: scale-in-hor-center 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+
+@keyframes scale-in-hor-center {
+    0% {
+      transform: scaleX(0);
+      opacity: 1;
+    }
+    100% {
+      transform: scaleX(1);
+      opacity: 1;
+    }
+  }
+  
+ */
+

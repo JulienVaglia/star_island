@@ -118,33 +118,19 @@ $error=false;
 
 <?=  $unique_email ?? ""; ?>
 <form class="mt-5 w-75 mx-auto" method="post" enctype="multipart/form-data">
-    <div class="mb-3">
-        <label for="pseudo" class="form-label">Pseudo</label>
-        <input name="nickname" type="text" class="form-control" id="pseudo">
-        <small class="text-danger"><?= $nickname ?? ""; ?></small>
-    </div>
+
     <div class="mb-3">
         <label for="exampleInputEmail1" class="form-label">Email</label>
         <input name="email" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
         <small class="text-danger"><?= $email ?? ""; ?></small>
     </div>
+
     <div class="mb-3">
         <label for="exampleInputPassword1" class="form-label">Mot de passe</label>
         <input name="password" type="password" class="form-control" id="exampleInputPassword1">
         <small class="text-danger"><?= $password  ?? ""; ?></small>
     </div>
-    <div class="mb-3">
-        <label for="picture_profil" class="form-label">Photo de profil</label>
-        <input onchange="loadFile()" name="picture_profil" type="file" class="form-control" id="picture_profil">
-        <small class="text-danger"><?= $picture ?? ""; ?></small>
-        <div class="text-center">
-        <img  id="image"  class="w-25 rounded mt-3 rounded-circle " alt=""></div>
-    </div>
 
-    <div class="mb-3 form-check">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-        <label class="form-check-label" for="exampleCheck1">Check me out</label>
-    </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 
