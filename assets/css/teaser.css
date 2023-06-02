@@ -35,8 +35,8 @@ main {
 }
 
 .barre_liens {
+    position: relative;
     width: 100vw;
-    position: absolute;
     bottom: 20px;
     display: flex;
     justify-content: center;    
@@ -54,10 +54,25 @@ main {
     opacity: 1;
 }
 
-#discord {
+.logoDiscord {
+    margin-bottom: -4vh;
+}
+
+#navLien {
     display: flex;
     justify-content: center;
-    margin-top: 31vh;
+    margin: 31vh auto;
+    width: 6vw;
+    max-width: 70vw;
+    transition: width 0.5s ease-in-out;
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+}
+
+button{
+    background-color: black;
+    border: none;
+    cursor: pointer;
+
 }
 
 .logo1 {
