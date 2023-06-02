@@ -17,20 +17,19 @@
 
         <div id="navLien">
 
-            <button class="button"><a href="" class=""><img class="logoDiscord" src="assets/img/logo discord.png" alt="discord"></a>
-
             <div class="barre_liens">
-                <a href="" class=""><img src="assets/img/logo Instagram.png" alt="instagram"></a>
-                <a href="" class=""><img src="assets/img/logo facebook.png" alt="facebook"></a>
-                <a href="" class="logo1"><img src="assets/img/logo tiktok.png" alt="tiktok"></a>
-                <a href="" class="logo2"><img src="assets/img/logo twitch.png" alt="twitch"></a>
-                <a href="" class=""><img src="assets/img/logo twitter.png" alt="twitter"></a>
-                <a href="" class=""><img src="assets/img/logo youtube.png" alt="youtube"></a>
+                <a href="" class="reseauSociaux" id="instagram"><img src="assets/img/logo Instagram.png" alt="instagram"></a>
+                <a href="" class="reseauSociaux" id="facebook"><img src="assets/img/logo facebook.png" alt="facebook"></a>
+                <a href="" class="reseauSociaux" id="tiktok"><img src="assets/img/logo tiktok.png" alt="tiktok"></a>               
+                <a href="" class="reseauSociaux" id="twitch"><img src="assets/img/logo twitch.png" alt="twitch"></a>
+                <a href="" class="reseauSociaux" id="twitter"><img src="assets/img/logo twitter.png" alt="twitter"></a>
+                <a href="" class="reseauSociaux" id="youtube"><img src="assets/img/logo youtube.png" alt="youtube"></a>
+                <a href=""  class="reseauSociaux discord"><img  src="assets/img/logo discord.png" alt="discord"></a>
             </div>
 
-        </div></button>
+        </div>
 
-      
+
     </main>
     <script type="text/javascript">
         var Affiche = document.getElementById("timer");
@@ -51,23 +50,6 @@
             tRebour = setTimeout("Rebour();", 1000);
         }
         Rebour();
-
-
-        const navLien = document.querySelector("#navLien");
-        const button = document.querySelector(".button");
-
-        let toggleIndex = 0;
-
-        button.addEventListener ( 'mouseup', () =>{
-        // console.log(navLien.scrollWidth); // verifier la largeur du container quand on clique sur discord
-
-            if (toggleIndex === 0 ){
-                navLien.style.width = `${navLien.scrollWidth}px`;
-                toggleIndex++;
-            }
-        })
-
-        
     </script>
 
 </body>

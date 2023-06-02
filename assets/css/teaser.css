@@ -19,27 +19,28 @@
 }
 
 body {
-    background: no-repeat url("../img/Perso1-removebg-preview.png");
+    background: no-repeat url("../img/predation.png");
     background-color: black;
     background-size: contain;
-    background-position:top 10vh left 15vw;
+    background-position:right 0vw;
 }
 
 main {
     width: 100vw;
     height: 100vh;
     background: rgb(0,0,0);
-    background: linear-gradient(90deg, rgba(0,0,0,0) 20%, rgba(0,0,0,1) 45%);
+    background: linear-gradient(90deg, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 90%);
 
 
 }
 
 .barre_liens {
-    position: relative;
     width: 100vw;
     bottom: 20px;
     display: flex;
-    justify-content: center;    
+    justify-content: center; 
+    align-items: center; 
+  
 }
 
 .barre_liens img {
@@ -47,39 +48,71 @@ main {
     margin-bottom: 1vh;
     display: flex;
     justify-content: center;
-    opacity: 0.5;
+    opacity: 0.8;
 }
 
 .barre_liens img:hover {
     opacity: 1;
 }
 
-.logoDiscord {
-    margin-bottom: -4vh;
-}
-
 #navLien {
     display: flex;
     justify-content: center;
     margin: 31vh auto;
+}
+
+.reseauSociaux{
+    position: absolute;
+    opacity: 0;
+    display: flex;
+    justify-content: center;
     width: 6vw;
-    max-width: 70vw;
-    transition: width 0.5s ease-in-out;
-    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+    height: 6vh;
 }
 
-button{
-    background-color: black;
-    border: none;
-    cursor: pointer;
+.reseauSociaux.discord{
+    opacity: 1;
+    display: flex;
+    
+}
+
+.barre_liens:hover #instagram {
+    transform: translateX(-5em);
+    transition: ease-in-out .9s;
+    opacity: 1;
+}
+
+.barre_liens:hover #twitch {
+    transform: translateX(-9em);
+    transition: ease-in-out .9s;
+    opacity: 1;
+}
+
+.barre_liens:hover #youtube {
+    transform: translateX(-13em);
+    transition: ease-in-out .9s;
+    opacity: 1;
 
 }
 
-.logo1 {
-    margin-right: 45px;
+.barre_liens:hover #facebook {
+    transform: translateX(5em);
+    transition: ease-in-out .9s;
+    opacity: 1;
+}
+.barre_liens:hover #twitter {
+    transform: translateX(9em);
+    transition: ease-in-out .9s;
+    opacity: 1;
+}
+.barre_liens:hover #tiktok {
+    transform: translateX(13em);
+    transition: ease-in-out .9s;
+    opacity: 1;
 }
 
-.logo2 {
-    margin-left: 45px;
-}
+
+
+
+
 
