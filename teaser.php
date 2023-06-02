@@ -15,15 +15,15 @@
 
         <div id="timer"></div>
 
-        <div class="barre_liens">
-            <ul>
-                <li><img src="assets/img/logo Instagram.png" alt="instagram"></li>
-                <li><img src="assets/img/logo facebook.png" alt="facebook"></li>
-                <li><img src="assets/img/logo tiktok.png" alt="tiktok"></li>
-                <li><img src="assets/img/logo discord.png" alt="tiktok"></li>
-                <li><img src="assets/img/logo twitch.png" alt="twitch"></li>
-                <li><img src="assets/img/logo twitter.png" alt="twitter"></li>
-                <li><img src="assets/img/logo youtube.png" alt="youtube"></li>
+        <div id="discord">
+            <img  src="assets/img/logo discord.png" alt="discord"></div>
+        <div class="barre_liens">            
+                <a href="" class=""><img src="assets/img/logo Instagram.png" alt="instagram"></a>
+                <a href="" class=""><img src="assets/img/logo facebook.png" alt="facebook"></a>
+                <a href="" class="logo1"><img src="assets/img/logo tiktok.png" alt="tiktok"></a>             
+                <a href="" class="logo2"><img src="assets/img/logo twitch.png" alt="twitch"></a>
+                <a href="" class=""><img src="assets/img/logo twitter.png" alt="twitter"></a>
+                <a href="" class=""><img src="assets/img/logo youtube.png" alt="youtube"></a>
             </ul>
             </a>
         </div>

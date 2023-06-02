@@ -7,16 +7,10 @@
     src: url('../fonts/Iceland-Regular.ttf') format('truetype');
 }
 
-body {
-    
-
-}
-
 #timer {
     width: 100vw;
-    position: absolute;
-    top: 20vh;
-    padding-top: 40vh;
+    top: 15vh;
+    padding-top: 50vh;
     color: white;
     display: flex;
     justify-content: center;
@@ -24,13 +18,19 @@ body {
     font-family: 'Iceland', cursive;
 }
 
-main {
-    width: 100vw;
-    height: 100vh;
+body {
     background: no-repeat url("../img/Perso1-removebg-preview.png");
     background-color: black;
     background-size: contain;
     background-position:top 10vh left 15vw;
+}
+
+main {
+    width: 100vw;
+    height: 100vh;
+    background: rgb(0,0,0);
+    background: linear-gradient(90deg, rgba(0,0,0,0) 20%, rgba(0,0,0,1) 45%);
+
 
 }
 
@@ -39,107 +39,32 @@ main {
     position: absolute;
     bottom: 20px;
     display: flex;
-    justify-content: center;
+    justify-content: center;    
 }
 
-.barre_liens ul {
-    border: 1px solid blue;
-    display: flex;
-}
-
-li {
-    list-style-type: none;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* -------------------------------------------- */
-/* 
-.personnage1{
-    position: absolute;
-    width: 45vw;
-    height: 98vh;
-    left: 15vw;
+.barre_liens img {
+    margin: 0 15px;
+    margin-bottom: 1vh;
     display: flex;
     justify-content: center;
+    opacity: 0.5;
 }
 
-#timer {
-    position: absolute;
-    width: 95vw;
-    padding-top: 40vh;
-    color: white;
+.barre_liens img:hover {
+    opacity: 1;
+}
+
+#discord {
     display: flex;
     justify-content: center;
-    font-size: 100px;
-    font-family: 'Iceland', cursive;
+    margin-top: 31vh;
 }
 
-.discordFixe{
-    position: absolute;
-    width: 100vw;
-    display: flex;
-    bottom: 40px;
-    justify-content: center;
-
+.logo1 {
+    margin-right: 45px;
 }
 
-#barre_liens{
-    width: 98vw;
-    position: fixed;
-    display: flex;
-    justify-content: center;
-    bottom: 10px;
-    margin-bottom: 15px;
-
+.logo2 {
+    margin-left: 45px;
 }
-
-#barre_liens li{
-    margin: 7px;
-    vertical-align: center;
-}
-
-.space1{
-    padding-right: 50px;
-}
-
-.space2{
-    padding-left: 50px;
-}
-
-.scale-in-hor-center:hover{
-    display: flex;
-    transition: ;
-    animation: scale-in-hor-center 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-}
-
-
-@keyframes scale-in-hor-center {
-    0% {
-      transform: scaleX(0);
-      opacity: 1;
-    }
-    100% {
-      transform: scaleX(1);
-      opacity: 1;
-    }
-  }
-  
- */
 
