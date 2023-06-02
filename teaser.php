@@ -15,6 +15,8 @@
 
         <div id="timer"></div>
 
+<!-- Barre des liens -->
+
         <div id="navLien">
 
             <div class="barre_liens">
@@ -50,7 +52,10 @@
             tRebour = setTimeout("Rebour();", 1000);
         }
         Rebour();
+
+        
     </script>
+    
 
 </body>
 

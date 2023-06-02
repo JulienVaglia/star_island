@@ -22,25 +22,29 @@ body {
     background: no-repeat url("../img/predation.png");
     background-color: black;
     background-size: contain;
-    background-position:right 0vw;
+    background-position: right;
 }
 
 main {
     width: 100vw;
     height: 100vh;
     background: rgb(0,0,0);
-    background: linear-gradient(90deg, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 90%);
+    background: linear-gradient(90deg, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 85%);
 
 
 }
 
+#navLien {
+    display: flex;
+    justify-content: center;
+    margin: 31vh auto;
+}
+
 .barre_liens {
-    width: 100vw;
     bottom: 20px;
     display: flex;
     justify-content: center; 
-    align-items: center; 
-  
+    align-items: center;
 }
 
 .barre_liens img {
@@ -53,12 +57,7 @@ main {
 
 .barre_liens img:hover {
     opacity: 1;
-}
-
-#navLien {
-    display: flex;
-    justify-content: center;
-    margin: 31vh auto;
+    scale: 1.2;
 }
 
 .reseauSociaux{
@@ -68,6 +67,7 @@ main {
     justify-content: center;
     width: 6vw;
     height: 6vh;
+    
 }
 
 .reseauSociaux.discord{
@@ -75,6 +75,8 @@ main {
     display: flex;
     
 }
+
+/* Effets de translation */
 
 .barre_liens:hover #instagram {
     transform: translateX(-5em);
@@ -92,7 +94,6 @@ main {
     transform: translateX(-13em);
     transition: ease-in-out .9s;
     opacity: 1;
-
 }
 
 .barre_liens:hover #facebook {
