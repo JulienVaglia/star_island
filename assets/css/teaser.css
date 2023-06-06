@@ -1,5 +1,6 @@
 *{
     margin: 0;
+    color: white;
 }
 
 @font-face {
@@ -7,37 +8,75 @@
     src: url('../fonts/Iceland-Regular.ttf') format('truetype');
 }
 
-#timer {
-    width: 100vw;
-    top: 15vh;
-    padding-top: 50vh;
-    color: white;
-    display: flex;
-    justify-content: center;
-    font-size: 100px;
-    font-family: 'Iceland', cursive;
-}
-
 body {
     background: no-repeat url("../img/predation.png");
     background-color: black;
-    background-size: contain;
+    background-size: 50vw;
     background-position: right;
+    
 }
 
 main {
     width: 100vw;
     height: 100vh;
     background: rgb(0,0,0);
-    background: linear-gradient(90deg, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 85%);
+    background: linear-gradient(90deg, rgba(0,0,0,1) 50vw, rgba(0,0,0,0) 80vw);
+}
 
+
+#logo{
+    margin-top: -7vh;
+    width: 15vw;
+    height: 15vh;
+    /* border: red solid 1px; */
+}
+
+.texte{
+    width: fit-content;
+    height: fit-content;
+    margin: 17vh 0 0 10vw;
+    font-family: 'Iceland', cursive;
+    /* border: green solid 1px; */
+    /* border: red solid 1px; */
 
 }
+
+h1{
+    text-decoration: underline #EA4C6F 1px ;
+    text-underline-position: under;
+}
+
+.presentation {
+    width: 25vw;
+    padding-top: 5vh;
+    font-size: 21px;
+    text-align: justify;
+    
+}
+
+#timer {
+    margin: 17vh auto;
+    width: fit-content;
+    color: white;
+    display: flex;
+    justify-content: center;
+    font-size: 100px;
+    font-family: 'Iceland', cursive;
+    /* border: red solid 1px; */
+
+}
+
+
+
+/*-------------- Barre de liens ouvrable -----------------*/
+
 
 #navLien {
     display: flex;
     justify-content: center;
-    margin: 31vh auto;
+    margin: 18vh auto;
+    width: fit-content;
+    /* border: red solid 1px; */
 }
 
 .barre_liens {
@@ -52,7 +91,7 @@ main {
     margin-bottom: 1vh;
     display: flex;
     justify-content: center;
-    opacity: 0.8;
+    opacity: 0.7;
 }
 
 .barre_liens img:hover {
@@ -65,18 +104,18 @@ main {
     opacity: 0;
     display: flex;
     justify-content: center;
-    width: 6vw;
-    height: 6vh;
-    
+    width: 4vw;
+    height: 6vh;   
 }
 
 .reseauSociaux.discord{
     opacity: 1;
     display: flex;
+    width: 5vw;
     
 }
 
-/* Effets de translation */
+    /* Effets de translation */
 
 .barre_liens:hover #instagram {
     transform: translateX(-5em);
@@ -112,7 +151,7 @@ main {
     opacity: 1;
 }
 
-
+/*-------------- Fin de barre de liens ouvrable -----------------*/
 
 
 
