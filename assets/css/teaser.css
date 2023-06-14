@@ -1,4 +1,4 @@
-*{
+* {
     margin: 0;
     color: white;
 }
@@ -13,59 +13,66 @@ body {
     background-color: black;
     background-size: 50vw;
     background-position: right;
-    
+
 }
 
 main {
     width: 100vw;
     height: 100vh;
-    background: rgb(0,0,0);
-    background: linear-gradient(90deg, rgba(0,0,0,1) 50vw, rgba(0,0,0,0) 80vw);
+    background: rgb(0, 0, 0);
+    background: linear-gradient(90deg, rgba(0, 0, 0, 1) 50vw, rgba(0, 0, 0, 0) 80vw);
 }
 
 
-#logo{
-    margin-top: -7vh;
-    width: 15vw;
-    height: 15vh;
-    /* border: red solid 1px; */
+#logo {
+    display: flex;
+    margin-left: 90vw;
+    padding-top: 2vh;
+    width: 8vw;
+    height: auto;
+    opacity: 0.7;
+
 }
 
-.texte{
+#logo:hover {
+    opacity: 1;
+    scale: 1.3;
+}
+
+/* --------------Titre + Présentation------------- */
+
+.texte {
     width: fit-content;
     height: fit-content;
-    margin: 17vh 0 0 10vw;
+    margin: 7vh 0 17vh 5vw;
     font-family: 'Iceland', cursive;
-    /* border: green solid 1px; */
-    /* border: red solid 1px; */
-
 }
 
-h1{
-    text-decoration: underline #EA4C6F 1px ;
+h1 {
+    text-decoration: underline #EA4C6F 1px;
     text-underline-position: under;
+    font-size: 70px;
 }
 
 .presentation {
-    width: 25vw;
-    padding-top: 5vh;
-    font-size: 21px;
+    width: 40vw;
+    padding-top: 10vh;
+    font-size: 25px;
     text-align: justify;
-    
 }
 
+
+/* --------------TIMER------------- */
+
 #timer {
-    margin: 17vh auto;
+    margin: 12vh auto;
     width: fit-content;
     color: white;
     display: flex;
     justify-content: center;
     font-size: 100px;
     font-family: 'Iceland', cursive;
-    /* border: red solid 1px; */
-
 }
-
 
 
 /*-------------- Barre de liens ouvrable -----------------*/
@@ -82,7 +89,7 @@ h1{
 .barre_liens {
     bottom: 20px;
     display: flex;
-    justify-content: center; 
+    justify-content: center;
     align-items: center;
 }
 
@@ -99,23 +106,23 @@ h1{
     scale: 1.2;
 }
 
-.reseauSociaux{
+.reseauSociaux {
     position: absolute;
     opacity: 0;
     display: flex;
     justify-content: center;
     width: 4vw;
-    height: 6vh;   
+    height: 6vh;
 }
 
-.reseauSociaux.discord{
+.reseauSociaux.discord {
     opacity: 1;
     display: flex;
     width: 5vw;
-    
+
 }
 
-    /* Effets de translation */
+/* Effets de translation */
 
 .barre_liens:hover #instagram {
     transform: translateX(-5em);
@@ -140,11 +147,13 @@ h1{
     transition: ease-in-out .9s;
     opacity: 1;
 }
+
 .barre_liens:hover #twitter {
     transform: translateX(9em);
     transition: ease-in-out .9s;
     opacity: 1;
 }
+
 .barre_liens:hover #tiktok {
     transform: translateX(13em);
     transition: ease-in-out .9s;
@@ -155,4 +164,103 @@ h1{
 
 
 
+/* Responsive */
 
+@media (max-width: 576px) {
+
+    body {
+        background: no-repeat ("../img/predation.png");
+        background-color: black;
+        background-size: cover;
+        height: 100vh;
+
+    }
+
+    #logo {
+        opacity: 1;
+        width: 25vw;
+        height: auto;
+        margin: 0 auto;
+    }
+
+    .texte {
+        margin: 0 auto;
+        width: 100%;
+    }
+
+    h1 {
+        text-align: center;
+        font-size: 70px;
+        margin: 5vh auto;
+    }
+
+    .presentation {
+        width: 70vw;
+        padding-top: 5vh;
+        font-size: 21px;
+        text-align: justify;
+        margin: auto;
+    }
+
+    #timer {
+        font-size: 60px;
+        width: 100%;
+        margin: 10vh auto;
+    }
+
+}
+
+/* ---------- */
+
+
+
+@media (max-width: 768px) {
+
+body {
+    background: no-repeat ("../img/predation.png");
+    background-color: black;
+    background-size: cover;
+    height: 100vh;
+    background-position: absolute;
+
+}
+
+#logo {
+    opacity: 1;
+    width: 40vw;
+    height: auto;
+    margin: 0 auto;
+}
+
+.texte {
+    margin: 10vh auto;
+    width: 100%;
+}
+
+h1 {
+    text-align: center;
+    font-size: 70px;
+    margin: 5vh auto;
+}
+
+.presentation {
+    width: 80vw;
+    padding-top: 5vh;
+    font-size: 21px;
+    text-align: justify;
+    margin: auto;
+}
+
+#timer {
+    font-size: 60px;
+    width: 100%;
+    margin: 10vh auto;
+}
+
+}
+
+@media (min-width: 992px) {}
+
+@media (min-width: 1200px) {}
+
+@media (min-width: 1400px) {}

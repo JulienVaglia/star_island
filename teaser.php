@@ -13,14 +13,15 @@
 
     <main class="">
 
-        <a href="https://discord.gg/starisland" target="_blank" class=""><img id="logo" src="assets/img/Starisland_logo.png" alt="logo"></a>
+        <a href="https://discord.gg/starisland" target="_blank" class=""><img id="logo" src="assets/img/starisland.png" alt="logo"></a>
 
         <div class="texte">
 
             <h1>Star'Island</h1>
 
 
-            <p class="presentation">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero ullam, ad impedit explicabo rem possimus. Amet quia et id rerum veniam iure provident aliquam sunt molestiae deleniti eos obcaecati veritatis ab cupiditate expedita, nemo quidem aspernatur odit, aut reiciendis accusantium? Dignissimos nemo expedita voluptatum veritatis, inventore molestias perferendis alias consectetur?</p>
+            <p class="presentation">Bienvenue sur notre serveur de jeux vidéo, l'endroit idéal pour les passionnés de RolePlay.<br>
+                Rejoignez une communauté dynamique et conviviale où vous pourrez rencontrer des joueurs du monde entier et partager votre passion commune pour les jeux vidéo.</p>
 
 
         </div>
