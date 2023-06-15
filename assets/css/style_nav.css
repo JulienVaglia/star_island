@@ -1,0 +1,46 @@
+.navbar {
+    height: 9vh;
+}
+
+#logo {
+    margin: -4vh 0 0 0.5vw;
+    width: 10vw;
+    height: auto;
+    position: absolute;
+}
+
+#logo_acceuil {
+    width: 3vw;
+    height: auto;
+    margin-left: 13vw;
+}
+
+.nav-item {
+    margin: auto 5vw;   
+}
+
+.nav-link {
+    color: white;
+    font-size: 30px;
+}
+
+.right_nav img {
+    width: 1.7vw;
+    height: auto;
+    display: flex;
+    margin: 0.5vh 0.5vw;
+}
+
+.right_nav a {
+    display: flex;
+    text-align: center;
+    color: white;
+    font-size: 10px;
+    text-decoration: none;
+}
+
+.right_nav a:hover {
+    color: white;
+}
+
+
