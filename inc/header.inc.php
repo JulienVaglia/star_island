@@ -33,7 +33,7 @@
                             <a class="nav-link" href="#">GALLERIE</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">VIP</a>
+                            <a class="nav-link" href="#">DEVENIR VIP</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">SERVEUR</a>

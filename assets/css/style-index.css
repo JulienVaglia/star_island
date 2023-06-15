@@ -5,7 +5,7 @@ body {
 }
 
 h1{
-    margin: 15vh 0 8vh;
+    margin: 20vh 0 12vh;
     text-align: center;
     color: white;
 }
@@ -24,12 +24,11 @@ html {
   
   .slider {
     position: relative;
-    width: 100vw;
-    height: 300px;
+    width: 100%;
+    height: 40vh;
     margin: 50px auto;
     overflow: hidden;
-
-
+    padding-top: 5vh;
   }
   
   .slider-controls {
@@ -81,22 +80,25 @@ html {
     list-style: none;
     padding: 0;
     margin: 0 auto;
-    height: 100%;
+    height: 90%;
     display: flex;
     justify-content: center;
     
   }
   
+#texte, #api {
+    margin-top: 15vh;
+}
+
   .slide {
     position: absolute; 
     width: 70vw;
-    height: 100%; 
+    height: 15vh; 
     opacity: 0;
     transform: translatex(100%);
     transition: transform 250ms linear;
     text-align: center;
-    color: white;
-    margin-top: 3vh;
+    color: rgb(255, 255, 255);
   }
   
   .slide-content {
@@ -200,6 +202,7 @@ input[type=radio] {
   margin: auto;
   transition: transform .4s ease;
   cursor: pointer;
+  border-radius: 15px;
 }
 
 .container2 {

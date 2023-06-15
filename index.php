@@ -26,9 +26,10 @@ require_once 'inc/header.inc.php';
             <!-- Slide 1 Texte -->
 
             <li class="slide">
-                <p class="slide-image">
+                <p class="slide-image" id="texte">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Et temporibus doloremque, culpa illum quibusdam eum eaque in voluptatibus aperiam blanditiis magni ea atque qui! A culpa corporis fuga eum ipsam.
-                    Fugit enim soluta sunt magnam omnis, possimus, porro autem facere necessitatibus distinctio consequuntur impedit, quam laborum hic fugiat mollitia! Distinctio corporis laboriosam velit cum quis labore cupiditate praesentium, tempora ipsam?
+                    Fugit enim soluta sunt magnam omnis, possimus, porro autem facere necessitatibus distinctio consequuntur impedit, quam laborum hic fugiat mollitia! Distinctio corporis laboriosam velit cum quis labore cupiditate praesentium, tempora ipsam?Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magni ipsa voluptas quos repellat odio eos saepe, maxime at temporibus neque impedit odit nisi excepturi accusamus placeat mollitia omnis quae quam!
+                    Optio ratione eligendi dignissimos, exercitationem quasi ex culpa expedita deserunt! Ipsam ea hic illum doloribus odio quibusdam, incidunt eius consequuntur distinctio ratione? Necessitatibus impedit aspernatur quae id officiis illum tempora?
                 </p>
             </li>
 
@@ -59,7 +60,7 @@ require_once 'inc/header.inc.php';
             <!-- Slide 3 API Top serveur -->
 
             <li class="slide">
-                <p class="slide-image">
+                <p class="slide-image" id="api">
                     3 - Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsa, quam consequuntur voluptas ut non illum aut! Sapiente fugit enim ipsa dolor quibusdam, maxime voluptatum molestiae deleniti ipsam. Enim, vel qui.
                     Corrupti repellat sequi debitis, distinctio neque veritatis ex. Iure molestias officiis rem cupiditate repellat? Officiis ad molestias, dolore delectus aliquid laborum veniam! Ipsam reprehenderit sequi suscipit magnam, consequatur nulla tempore.
                 </p>
