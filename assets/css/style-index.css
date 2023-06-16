@@ -5,7 +5,7 @@ body {
 }
 
 h1{
-    margin: 20vh 0 12vh;
+    margin: 20vh 0 6vh;
     text-align: center;
     color: white;
 }
@@ -54,7 +54,7 @@ html {
   
   .slider-controls label {
     display: inline-block;
-    border: 2px solid #ffffff;
+    border: 3px solid #ffffff;
     height: 20px;
     width: 20px;
     border-radius: 50%;
@@ -251,3 +251,89 @@ img {
     box-shadow: 0px 0px 5px 0px rgba(81, 81, 81, 0.47);
   }
 }
+
+/*-------------- Barre de liens ouvrable -----------------*/
+
+
+#navLien {
+    display: flex;
+    justify-content: center;
+    margin: 16vh auto 0;
+    width: fit-content;
+    position: sticky;
+}
+
+.barre_liens {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.barre_liens img {
+    margin: 0 15px;
+    margin-bottom: 1vh;
+    display: flex;
+    justify-content: center;
+    opacity: 0.7;
+}
+
+.barre_liens img:hover {
+    opacity: 1;
+    scale: 1.2;
+}
+
+.reseauSociaux {
+    position: absolute;
+    opacity: 0;
+    display: flex;
+    justify-content: center;
+    width: 4vw;
+    height: 6vh;
+}
+
+.reseauSociaux.discord {
+    opacity: 1;
+    display: flex;
+    width: 5vw;
+
+}
+
+/* Effets de translation */
+
+.barre_liens:hover #instagram {
+    transform: translateX(-5em);
+    transition: ease-in-out .9s;
+    opacity: 1;
+}
+
+.barre_liens:hover #twitch {
+    transform: translateX(-9em);
+    transition: ease-in-out .9s;
+    opacity: 1;
+}
+
+.barre_liens:hover #youtube {
+    transform: translateX(-13em);
+    transition: ease-in-out .9s;
+    opacity: 1;
+}
+
+.barre_liens:hover #facebook {
+    transform: translateX(5em);
+    transition: ease-in-out .9s;
+    opacity: 1;
+}
+
+.barre_liens:hover #twitter {
+    transform: translateX(9em);
+    transition: ease-in-out .9s;
+    opacity: 1;
+}
+
+.barre_liens:hover #tiktok {
+    transform: translateX(13em);
+    transition: ease-in-out .9s;
+    opacity: 1;
+}
+
+/*-------------- Fin de barre de liens ouvrable -----------------*/
