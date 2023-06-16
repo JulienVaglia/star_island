@@ -69,4 +69,5 @@ require_once 'inc/header.inc.php';
     </div>
 
 </main>
-</div <?php require_once 'inc/footer.inc.php';          ?>
+</div>
+<?php require_once 'inc/footer.inc.php';          ?>

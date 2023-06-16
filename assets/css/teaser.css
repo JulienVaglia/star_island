@@ -263,7 +263,7 @@ body {
 }
 
 .reseauSociaux {
-    position: absolute;
+    position: initial;
     opacity: 1;
     width: 4vw;
     height: 6vh;
