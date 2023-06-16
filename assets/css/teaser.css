@@ -119,6 +119,7 @@ h1 {
     opacity: 1;
     display: flex;
     width: 5vw;
+    z-index: 6;
 
 }
 
@@ -173,6 +174,7 @@ h1 {
         background-color: black;
         background-size: cover;
         height: 100vh;
+
 
     }
 
