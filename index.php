@@ -1,7 +1,6 @@
-<?php require_once 'config/function.php';
+<?php 
+require_once 'config/function.php';
 require_once 'inc/header.inc.php';
-
-
 ?>
 
 <main>
@@ -28,8 +27,7 @@ require_once 'inc/header.inc.php';
             <li class="slide">
                 <p class="slide-image" id="texte">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Et temporibus doloremque, culpa illum quibusdam eum eaque in voluptatibus aperiam blanditiis magni ea atque qui! A culpa corporis fuga eum ipsam.
-                    Fugit enim soluta sunt magnam omnis, possimus, porro autem facere necessitatibus distinctio consequuntur impedit, quam laborum hic fugiat mollitia! Distinctio corporis laboriosam velit cum quis labore cupiditate praesentium, tempora ipsam?Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magni ipsa voluptas quos repellat odio eos saepe, maxime at temporibus neque impedit odit nisi excepturi accusamus placeat mollitia omnis quae quam!
-                    Optio ratione eligendi dignissimos, exercitationem quasi ex culpa expedita deserunt! Ipsam ea hic illum doloribus odio quibusdam, incidunt eius consequuntur distinctio ratione? Necessitatibus impedit aspernatur quae id officiis illum tempora?
+                    Fugit enim soluta sunt magnam omnis, possimus, porro autem facere necessitatibus distinctio consequuntur impedit, quam laborum hic fugiat mollitia! Distinctio corporis laboriosam velit cum quis labore cupiditate praesentium, tempora ipsam?
                 </p>
             </li>
 
@@ -67,7 +65,30 @@ require_once 'inc/header.inc.php';
             </li>
         </ul>
     </div>
+    
+<?php 
+require_once 'inc/barre_lien.inc.php';
+?>
 
+    <!-- Notation etoiles -->
+
+    <div class="bloc_avis">
+
+        <h2 id="titre_commentaire">Votre avis nous intéresse</h2>
+
+        <div class="rating">
+            <div class="stars">
+                <i class="fa fa-star gold"></i>
+                <i class="fa fa-star-o gold" aria-hidden="true"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+            </div>
+        </div>
+        <textarea name="commentaire" id="commentaire" cols="90vw" rows="10"></textarea>
+        <button>Publier</button>
+    </div>
 </main>
 </div>
 <?php require_once 'inc/footer.inc.php';          ?>

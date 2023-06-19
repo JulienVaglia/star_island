@@ -3,6 +3,8 @@ require_once 'inc/header.inc.php'; ?>
 
 <main>
 
+    <div class="affichage"></div>
+
     <div class="container2">
         <input type="radio" name="slider" id="item-1" checked>
         <input type="radio" name="slider" id="item-2">

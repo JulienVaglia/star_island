@@ -3,6 +3,10 @@
 @import url("https://fonts.googleapis.com/css?family=DM+Sans:400,500,700&display=swap");
 
 
+main{
+    margin: 0 auto;
+}
+
 .slide {
   display: flex;
   align-items: center;
@@ -28,9 +32,7 @@ input[type=radio] {
 }
 
 .container2 {
-  width: 50vw;
-  /* max-width: 800px;
-  max-height: 600px; */
+  width: 100vw;
   height: 50vh;
   transform-style: preserve-3d;
   display: flex;
@@ -43,7 +45,6 @@ input[type=radio] {
   position: relative;
   width: 40vw;
   height: 20vh;
-  /* margin-bottom: 20px; */
 }
 
 img {
@@ -73,6 +74,8 @@ img {
     box-shadow: 0px 0px 5px 0px rgba(81, 81, 81, 0.47);
   }
 }
+
+
 
 /*-------------- Barre de liens ouvrable -----------------*/
 

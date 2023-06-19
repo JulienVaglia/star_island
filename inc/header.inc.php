@@ -6,9 +6,12 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link rel="stylesheet" href="assets/css/style_nav.css">  
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/5.2.3/lux/bootstrap.min.css" integrity="sha512-+TCHrZDlJaieLxYGAxpR5QgMae/jFXNkrc6sxxYsIVuo/28nknKtf9Qv+J2PqqPXj0vtZo9AKW/SMWXe8i/o6w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-     <link rel="stylesheet" href="assets/css/style-index.css">
+    <link rel="stylesheet" href="assets/css/style_nav.css">
+    <link rel="stylesheet" href="assets/css/style-index.css">
+    <link rel="stylesheet" href="assets/css/style-gallerie.css">
+    <link rel="stylesheet" href="assets/css/style-barre_lien.css">
+
 </head>
 
 <body>
@@ -20,8 +23,8 @@
                     <img id="logo" src="assets/img/starisland.png" alt="">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+                    <span class="navbar-toggler-icon"></span>
+                </button>
                 <div class="collapse navbar-collapse" id="navbarColor01">
                     <ul class="navbar-nav me-auto">
                         <li>
@@ -30,7 +33,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">GALLERIE</a>
+                            <a class="nav-link" href="gallerie.php">GALLERIE</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">DEVENIR VIP</a>
@@ -40,30 +43,26 @@
                         </li>
                         <?php if (admin()) :           ?>
                             <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">ADMIN</a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="<?= BASE_PATH . 'back/userList.php'; ?>">Gestion utilisateur</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="<?= BASE_PATH . 'back/'; ?>">Accès Back-office</a>
-                    </div>
-                </li>
+                                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">ADMIN</a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="<?= BASE_PATH . 'back/userList.php'; ?>">Gestion utilisateur</a>
+                                    <a class="dropdown-item" href="#">Another action</a>
+                                    <a class="dropdown-item" href="#">Something else here</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="<?= BASE_PATH . 'back/'; ?>">Accès Back-office</a>
+                                </div>
+                            </li>
                         <?php endif;           ?>
 
                     </ul>
                     <div class="right_nav">
-                            <a href="<?= BASE_PATH . 'security/login.php'; ?>" ><img src="assets/icon/tableau-daffichage.png" alt=""><br> TUTORIEL</a>
-                            <a href="<?= BASE_PATH . 'security/register.php'; ?>" class=><img src="assets/icon/bulle-de-discussion.png" alt=""><br>EVENT</a>
-                        </div>
-
-                    <?php if (connect()) :           ?>
-                        <a href="<?= BASE_PATH . '?a=dis'; ?>" class="right_nav">Déconnexion</a>
-                    <?php else :           ?>
-                    
-                    <?php endif;        ?>
+                        <a href="<?= BASE_PATH . 'security/login.php'; ?>">
+                            <img src="assets/icon/tableau-daffichage.png" alt=""><br> TUTORIEL</a>
+                        <a href="<?= BASE_PATH . 'security/register.php'; ?>" class=>
+                            <img src="assets/icon/bulle-de-discussion.png" alt=""><br>EVENT</a>
+                    </div>
 
                 </div>
             </div>
         </nav>
-    </header> 
+    </header>

@@ -155,7 +155,7 @@ h1 {
     opacity: 1;
 }
 
-.barre_liens:hover #tiktok {
+.barre_liens:hover #tiktok {    
     transform: translateX(13em);
     transition: ease-in-out .9s;
     opacity: 1;
