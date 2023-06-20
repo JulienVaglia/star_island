@@ -6,12 +6,20 @@
   
 }
 
+#logo:hover {
+    scale: 1.05;
+}
+
+.right_nav a:hover {
+    scale: 1.1;
+}
+
 .barre_liens {
     display: flex;
     justify-content: center;
     align-items: center;
     position: fixed;
-    bottom: 50px;
+    bottom: 45px;
 
 }
 

@@ -1,8 +1,32 @@
-.footer {
-    height: 15vh;
+footer {
+    height: 10vh;
+    background-color: black;
 }
 
-.footer img {
-    width: 5vw;
-    height: 2vh;
+.contact {
+    width: 12vw;
+    height: 10vh;
+    font-size: 20px;
+    background-color: rgba(0, 0, 0, 0);
+    border: black ;
+    color: white;
 }
+
+.contact:hover {
+    color: #ea4c6e;
+    scale: 1.1;
+}
+
+.contact img {
+    width: 2vw;
+    height: auto;
+    margin: 0 1vw;
+}
+
+.logo18 {
+    float: right;
+    width: 2vw;
+    height: auto;
+    margin: auto 1vw ;
+}
+

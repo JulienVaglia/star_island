@@ -45,14 +45,14 @@
         text-align: center;
     }
 
-    .slider input[type="radio"] {
+    /* .slider input[type="radio"] {
         position: absolute;
         top: 0;
         left: 0;
         opacity: 0;
         width: 0;
         height: 0;
-    }
+    } */
 
     .slider-controls label {
         display: inline-block;
@@ -279,7 +279,7 @@
         width: 30vw;
         height: 11vh;
         margin-bottom: 7vh;
-        background-color: rgba(214, 214, 214, 0.083);
+        background-color: rgba(128, 128, 128, 0.258);
         border: 1px solid #ea4c6e60;
 
     }
@@ -320,7 +320,7 @@
         padding: 10px 10px;
     }
 
-    button {
+    .publier {
         background-color: #ea4c6e;
         color: black;
         border: black;

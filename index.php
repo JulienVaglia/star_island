@@ -61,8 +61,7 @@ require_once 'inc/header.inc.php';
 
                 <li class="slide">
                     <p class="slide-image" id="api">
-                        3 - Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsa, quam consequuntur voluptas ut non illum aut! Sapiente fugit enim ipsa dolor quibusdam, maxime voluptatum molestiae deleniti ipsam. Enim, vel qui.
-                        Corrupti repellat sequi debitis, distinctio neque veritatis ex. Iure molestias officiis rem cupiditate repellat? Officiis ad molestias, dolore delectus aliquid laborum veniam! Ipsam reprehenderit sequi suscipit magnam, consequatur nulla tempore.
+                        3 - API Top Serveur
                     </p>
                 </li>
             </ul>
@@ -75,7 +74,7 @@ require_once 'inc/header.inc.php';
 
     <div class="avis_client">
         <div class="bloc_commentaire">
-            
+
             <div class="bulle_gauche">
             </div>
 
@@ -95,12 +94,10 @@ require_once 'inc/header.inc.php';
         <h2 id="titre_commentaire">Votre avis nous intéresse</h2>
 
         <textarea name="commentaire" id="commentaire" rows="10" placeholder="Ecrire votre commentaire"></textarea>
-        <button> Publier </button>
+        <button class="publier" > Publier </button>
     </div>
 
 
 
 </main>
-</div>
-</div>
 <?php require_once 'inc/footer.inc.php';          ?>
