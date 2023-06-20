@@ -7,6 +7,8 @@ require_once 'inc/header.inc.php';
 
     <div class="Bloc1">
 
+        <div class="fondu1"></div>
+
         <h1>Bienvenue sur Star'Island</h1>
 
         <!-- --------- Carroussel principal --------- -->
@@ -67,36 +69,45 @@ require_once 'inc/header.inc.php';
             </ul>
         </div>
     </div>
+
+
     <?php
     require_once 'inc/barre_lien.inc.php';
     ?>
-    <!-- Notation etoiles -->
 
-    <div class="avis_client">
-        <div class="bloc_commentaire">
+    <div class="bloc2">
 
-            <div class="bulle_gauche">
-            </div>
+        <!-- Notation etoiles -->
 
-            <div class="bulle_droite">
-            </div>
+        <div class="avis_client">
+            <div class="bloc_commentaire">
 
-            <div class="bulle_gauche">
-            </div>
+                <div class="bulle_gauche">
+                    <img src="assets/img/carrousssel 8.jpg" alt="">
+                </div>
 
-            <div class="bulle_droite">
+                <div class="bulle_droite">
+                <img src="assets/img/carrousssel 8.jpg" alt="">
+                </div>
+
+                <div class="bulle_gauche">
+                <img src="assets/img/carrousssel 8.jpg" alt="">
+                </div>
+
+                <div class="bulle_droite">
+                <img src="assets/img/carrousssel 8.jpg" alt="">
+                </div>
             </div>
         </div>
+
+        <div class="bloc_avis">
+
+            <h2 id="titre_commentaire">Votre avis nous intéresse</h2>
+
+            <textarea name="commentaire" id="commentaire" rows="10" placeholder="Ecrire votre commentaire"></textarea>
+            <button class="publier"> Publier </button>
+        </div>
     </div>
-
-    <div class="bloc_avis">
-
-        <h2 id="titre_commentaire">Votre avis nous intéresse</h2>
-
-        <textarea name="commentaire" id="commentaire" rows="10" placeholder="Ecrire votre commentaire"></textarea>
-        <button class="publier" > Publier </button>
-    </div>
-
 
 
 </main>

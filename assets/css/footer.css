@@ -23,10 +23,15 @@ footer {
     margin: 0 1vw;
 }
 
-.logo18 {
+.right_footer {
+    width: 12vw;
+    height: 10vh;
     float: right;
-    width: 2vw;
-    height: auto;
-    margin: auto 1vw ;
+    text-align: center;
+    padding-top: 2.9vh;
 }
 
+.logo18 {  
+    width: 2vw;
+    height: auto;
+}

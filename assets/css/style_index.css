@@ -5,6 +5,24 @@
         background-size: 100vw 100vh;
     }
 
+    .bloc1 {
+        position:relative;
+        width: 100%;
+        height: 93vh;
+        background-image: url("../img/ville2.jpeg");
+    }
+
+    .fondu1{
+        background: rgb(0,0,0);
+        position: absolute;
+        background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.5) 15%, rgba(0,0,0,0) 40%, rgba(0,0,0,0) 60%, rgba(0,0,0,0) 80%, rgba(0,0,0,1) 100%);
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+
+
     h1 {
         margin: 20vh 0 6vh;
         text-align: center;
@@ -211,8 +229,6 @@
 
     .container2 {
         width: 50vw;
-        /* max-width: 800px;
-  max-height: 600px; */
         height: 50vh;
         transform-style: preserve-3d;
         display: flex;
@@ -225,7 +241,6 @@
         position: relative;
         width: 40vw;
         height: 20vh;
-        /* margin-bottom: 20px; */
     }
 
     img {
@@ -279,19 +294,18 @@
         width: 30vw;
         height: 11vh;
         margin-bottom: 7vh;
-        background-color: rgba(128, 128, 128, 0.258);
+        background-color: #ffffff98;
         border: 1px solid #ea4c6e60;
-
     }
 
     .bulle_gauche {
-        border-radius: 15px 15px 0px 15px;
+        border-radius: 25px 25px 0px 25px;
         float: left;
         margin-bottom: 17vh;
     }
 
     .bulle_droite {
-        border-radius: 15px 15px 15px 0px;
+        border-radius: 25px 25px 25px 0px;
         float: right;
         margin-top: 13vh;
     }
@@ -333,4 +347,19 @@
         justify-content: center;
     }
 
+    .bloc_commentaire img {
+        border-radius: 50%;
+        width: 8vw;
+        height: auto;
+        clip-path: ellipse(33% 50%);
+    }
+
+    .bulle_gauche img,
+    .bulle_droite img {
+
+        border-radius: 50%;
+        width: 8vw;
+        height: auto;
+        clip-path: ellipse(33% 50%); 
+    }
     
