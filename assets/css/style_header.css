@@ -20,16 +20,20 @@
 }
 
 .nav-item {
-    margin: auto 5vw;   
+    margin: auto 3vw;   
+}
+
+.nav-item:hover {
+    scale: 1.1;   
 }
 
 .nav-link {
     color: white;
-    font-size: 30px;
+    font-size: 18px;
 }
 
 .right_nav img {
-    width: 1.7vw;
+    width: 1.5vw;
     height: auto;
     display: flex;
     margin: 0.5vh 0.5vw;

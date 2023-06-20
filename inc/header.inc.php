@@ -7,10 +7,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/5.2.3/lux/bootstrap.min.css" integrity="sha512-+TCHrZDlJaieLxYGAxpR5QgMae/jFXNkrc6sxxYsIVuo/28nknKtf9Qv+J2PqqPXj0vtZo9AKW/SMWXe8i/o6w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="assets/css/style_nav.css">
-    <link rel="stylesheet" href="assets/css/style-index.css">
-    <link rel="stylesheet" href="assets/css/style-gallerie.css">
-    <link rel="stylesheet" href="assets/css/style-barre_lien.css">
+    <link rel="stylesheet" href="assets/css/style_header.css">
+    <link rel="stylesheet" href="assets/css/style_index.css">
+    <link rel="stylesheet" href="assets/css/style_gallerie.css">
+    <link rel="stylesheet" href="assets/css/style_barre_lien.css">
 
 </head>
 
@@ -41,24 +41,12 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#">SERVEUR</a>
                         </li>
-                        <?php if (admin()) :           ?>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">ADMIN</a>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="<?= BASE_PATH . 'back/userList.php'; ?>">Gestion utilisateur</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <a class="dropdown-item" href="#">Something else here</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="<?= BASE_PATH . 'back/'; ?>">Accès Back-office</a>
-                                </div>
-                            </li>
-                        <?php endif;           ?>
 
                     </ul>
                     <div class="right_nav">
-                        <a href="<?= BASE_PATH . 'security/login.php'; ?>">
+                        <a href="#">
                             <img src="assets/icon/tableau-daffichage.png" alt=""><br> TUTORIEL</a>
-                        <a href="<?= BASE_PATH . 'security/register.php'; ?>" class=>
+                        <a href="#" class=>
                             <img src="assets/icon/bulle-de-discussion.png" alt=""><br>EVENT</a>
                     </div>
 

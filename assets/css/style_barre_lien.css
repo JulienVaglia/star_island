@@ -3,13 +3,16 @@
     justify-content: center;
     margin: 16vh auto 0;
     width: fit-content;
-    position: sticky;
+  
 }
 
 .barre_liens {
     display: flex;
     justify-content: center;
     align-items: center;
+    position: fixed;
+    bottom: 50px;
+
 }
 
 .barre_liens img {
@@ -38,7 +41,7 @@
     opacity: 1;
     display: flex;
     width: 5vw;
-    z-index: 6;
+    z-index: 10;
 
 }
 

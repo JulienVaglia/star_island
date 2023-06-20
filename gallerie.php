@@ -1,4 +1,5 @@
-<?php require_once 'config/function.php';
+<?php 
+require_once 'config/function.php';
 require_once 'inc/header.inc.php'; ?>
 
 <main>
@@ -22,6 +23,10 @@ require_once 'inc/header.inc.php'; ?>
         </div>
 
     </div>
+
+<?php 
+require_once 'inc/barre_lien.inc.php';
+ ?>
 
 </main>
 

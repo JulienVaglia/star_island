@@ -79,15 +79,15 @@ img {
 
 /*-------------- Barre de liens ouvrable -----------------*/
 
-
+/* 
 #navLien {
     display: flex;
     justify-content: center;
     margin: 16vh auto 0;
     width: fit-content;
     position: sticky;
-}
-
+} */
+/* 
 .barre_liens {
     display: flex;
     justify-content: center;
@@ -121,9 +121,9 @@ img {
     display: flex;
     width: 5vw;
 
-}
+} */
 
-/* Effets de translation */
+/* Effets de translation
 
 .barre_liens:hover #instagram {
     transform: translateX(-5em);
@@ -159,6 +159,6 @@ img {
     transform: translateX(13em);
     transition: ease-in-out .9s;
     opacity: 1;
-}
+} */
 
 /*-------------- Fin de barre de liens ouvrable -----------------*/
