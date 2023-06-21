@@ -1,9 +1,9 @@
     #navLien {
     display: flex;
     justify-content: center;
-    margin: 16vh auto 0;
+    margin: 0 auto;
     width: fit-content;
-  
+    z-index: 1; 
 }
 
 #logo:hover {
@@ -15,6 +15,7 @@
 }
 
 .barre_liens {
+    z-index: 1;
     display: flex;
     justify-content: center;
     align-items: center;

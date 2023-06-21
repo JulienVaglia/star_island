@@ -5,9 +5,7 @@ require_once 'inc/header.inc.php';
 
 <main>
 
-    <div class="Bloc1">
-
-        <div class="fondu1"></div>
+    <section class="bloc1">
 
         <h1>Bienvenue sur Star'Island</h1>
 
@@ -68,14 +66,18 @@ require_once 'inc/header.inc.php';
                 </li>
             </ul>
         </div>
-    </div>
+
+        <div class="fondu1"></div>
+    </section>
 
 
     <?php
     require_once 'inc/barre_lien.inc.php';
     ?>
 
-    <div class="bloc2">
+    <section class="bloc2">
+
+        <div class="fondu2"></div>
 
         <!-- Notation etoiles -->
 
@@ -87,15 +89,15 @@ require_once 'inc/header.inc.php';
                 </div>
 
                 <div class="bulle_droite">
-                <img src="assets/img/carrousssel 8.jpg" alt="">
+                    <img src="assets/img/carrousssel 8.jpg" alt="">
                 </div>
 
                 <div class="bulle_gauche">
-                <img src="assets/img/carrousssel 8.jpg" alt="">
+                    <img src="assets/img/carrousssel 8.jpg" alt="">
                 </div>
 
                 <div class="bulle_droite">
-                <img src="assets/img/carrousssel 8.jpg" alt="">
+                    <img src="assets/img/carrousssel 8.jpg" alt="">
                 </div>
             </div>
         </div>
@@ -107,7 +109,9 @@ require_once 'inc/header.inc.php';
             <textarea name="commentaire" id="commentaire" rows="10" placeholder="Ecrire votre commentaire"></textarea>
             <button class="publier"> Publier </button>
         </div>
-    </div>
+
+    </section>
+
 
 
 </main>

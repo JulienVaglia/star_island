@@ -2,11 +2,11 @@
     require_once 'config/function.php';
     require_once 'inc/header.inc.php'; ?>
 
-    <main>
+    <main class="main_gallerie">
 
         <div class="affichage"></div>
 
-        <div class="container2">
+        <div class="container2_gallerie">
 
             <div class="view_image"></div>
 

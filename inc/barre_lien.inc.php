@@ -1,5 +1,3 @@
-
-
         <div id="navLien">
 
             <div class="barre_liens">
