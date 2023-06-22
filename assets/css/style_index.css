@@ -14,7 +14,7 @@
         top: 0;
         bottom: 0;
         left: 0;
-        right: 0;  
+        right: 0;
     }
 
     .bloc2 {
@@ -23,14 +23,15 @@
         position: relative;
         background-image: url("../img/underwater.jpg");
         background-size: cover;
-      /* border: #ea4c6e 2px solid; */
+        background-position: center;
+        z-index: 2000;
     }
 
     .fondu2 {
-        height: 80vh;
+        z-index: 0;
         position: absolute;
         background: rgb(0, 0, 0);
-        background: linear-gradient(180deg, rgba(0, 0, 0, 1) 6%, rgba(0, 0, 0, 0.13769257703081228) 20%);
+        background: linear-gradient(180deg, rgba(0, 0, 0, 1) 1%, rgba(0, 0, 0, 0) 30%);
         top: 0;
         bottom: 0;
         left: 0;
@@ -301,7 +302,7 @@
         width: 30vw;
         height: 11vh;
         margin-bottom: 7vh;
-        background-color: #ffffff98;
+        background-color: #d2d2d2ad;
         border: 1px solid #ea4c6e60;
     }
 
@@ -324,7 +325,6 @@
     }
 
     .bloc_avis {
-        z-index: 10;
         width: 45vw;
         margin: 10vh auto;
         padding: 3vh 0 3vh 0;
@@ -340,13 +340,13 @@
     }
 
     textarea {
-        z-index: 100;
         margin-top: 2vh;
         border-radius: 10px;
         height: 12vh;
         width: 40vw;
         max-width: 100%;
         padding: 10px 10px;
+        border: none;
     }
 
     .publier {

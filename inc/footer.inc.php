@@ -4,7 +4,7 @@
 <footer>
 
     <button class="contact">
-        <img src="assets/icon/enveloppe.png" alt="mail">
+        <img  src="assets/icon/enveloppe.png" alt="mail">
         <span>Contact</span>
     </button>
 

@@ -12,7 +12,7 @@ footer {
     color: white;
 }
 
-.contact:hover {
+span:hover {
     color: #ea4c6e;
     scale: 1.1;
 }

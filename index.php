@@ -77,8 +77,6 @@ require_once 'inc/header.inc.php';
 
     <section class="bloc2">
 
-        <div class="fondu2"></div>
-
         <!-- Notation etoiles -->
 
         <div class="avis_client">
@@ -110,9 +108,9 @@ require_once 'inc/header.inc.php';
             <button class="publier"> Publier </button>
         </div>
 
+        <div class="fondu2"></div>
+
     </section>
-
-
 
 </main>
 <?php require_once 'inc/footer.inc.php';          ?>
