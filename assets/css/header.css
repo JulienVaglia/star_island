@@ -24,8 +24,14 @@
     margin: auto 3vw;   
 }
 
-.nav-item:hover {
-    scale: 1.1;   
+.nav-item a {
+    font-size: small;
+}
+
+.nav-item a:hover {
+    scale: 1.2;
+    text-decoration: underline #EA4C6F 1px;
+    text-underline-position: under; 
 }
 
 .nav-link {

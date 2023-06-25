@@ -3,7 +3,6 @@
     justify-content: center;
     margin: 0 auto;
     width: fit-content;
-    z-index: 1; 
 }
 
 #logo:hover {
@@ -47,10 +46,10 @@
 }
 
 .reseauSociaux.discord {
+    z-index: 10000;
     opacity: 1;
     display: flex;
     width: 5vw;
-    z-index: 10;
 
 }
 

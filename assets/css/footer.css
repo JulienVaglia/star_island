@@ -17,6 +17,10 @@ span:hover {
     scale: 1.1;
 }
 
+span {
+    font-size: medium;     
+}
+
 .contact img {
     width: 2vw;
     height: auto;

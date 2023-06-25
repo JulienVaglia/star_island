@@ -9,9 +9,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/5.2.3/lux/bootstrap.min.css" integrity="sha512-+TCHrZDlJaieLxYGAxpR5QgMae/jFXNkrc6sxxYsIVuo/28nknKtf9Qv+J2PqqPXj0vtZo9AKW/SMWXe8i/o6w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="assets/css/header.css">
     <link rel="stylesheet" href="assets/css/footer.css">
-    <link rel="stylesheet" href="assets/css/style_index.css">
-    <link rel="stylesheet" href="assets/css/style_gallerie.css">
     <link rel="stylesheet" href="assets/css/style_barre_lien.css">
+
 
 </head>
 
@@ -37,7 +36,7 @@
                             <a class="nav-link" href="gallerie.php">GALLERIE</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">DEVENIR VIP</a>
+                            <a class="nav-link" href="vip.php">DEVENIR VIP</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">SERVEUR</a>
