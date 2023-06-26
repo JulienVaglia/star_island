@@ -1,5 +1,9 @@
+body {
+  height: 83vh;
+}
+
 .main_vip {
-  background-image: url(../img/limousine.jpg);
+  background-image: url(../img/backgroundVip.jpg);
   background-size: cover;
   background-position:bottom;
 }
@@ -26,11 +30,20 @@ p {
 
 #img_vip {
   z-index: 1;
-  left: 76vw;
-  top: -30vh;
+  left: 78vw;
+  top: -30.2vh;
   width: 11vw;
   height: auto;
   position: relative;
+}
+
+.contour_vip {
+  width: 12vw;
+    height: 38vh;
+    border: solid 1px #EA4C6F;
+    position: relative;
+    left: 77vw;
+    bottom: 68vh;
 }
 
 #img_vipPlus {
@@ -40,15 +53,6 @@ p {
   width: 18vw;
   height: auto;
   position: relative;
-}
-
-.contour_vip {
-  width: 12vw;
-  height: 38vh;
-  border: solid 1px #EA4C6F;
-  position: relative;
-  left: 75vw;
-  bottom: 68vh;
 }
 
 .contour_vipPlus {
@@ -63,5 +67,5 @@ p {
 h2 {
   color: #EA4C6F;
   text-align: center;
-  margin: 10vh auto 0;
+  margin: 10vh auto 1.5vh;
 }
