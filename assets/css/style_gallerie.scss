@@ -1,9 +1,11 @@
 /* Carroussel image */
 
 h1 {
+  padding-top: 3vh;
   text-align: center;
   color: white;
-
+  font-size: 60px;
+  text-shadow: 1px 0 0 rgb(0, 0, 0), 1px 1px 0 rgb(0, 0, 0), 0 1px 0 rgb(0, 0, 0), -1px 1px 0 rgb(0, 0, 0), -1px 0 0 rgb(0, 0, 0), -1px -1px 0 rgb(0, 0, 0), 0 -1px 0 rgb(0, 0, 0), 1px -1px 0 rgb(0, 0, 0);
 }
 
 .container_gallerie. {
@@ -17,7 +19,7 @@ h1 {
 }
 
 .big_bloc {
-  padding-top: 8vh;
+  padding-top: 3vh;
   width: fit-content;
   margin: 0 auto;
 }

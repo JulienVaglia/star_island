@@ -1,0 +1,67 @@
+.main_vip {
+  background-image: url(../img/limousine.jpg);
+  background-size: cover;
+  background-position:bottom;
+}
+
+h1 {
+  padding-top: 3vh;
+  text-align: center;
+  color: white;
+  font-size: 60px;
+  text-shadow: 1px 0 0 rgb(0, 0, 0), 1px 1px 0 rgb(0, 0, 0), 0 1px 0 rgb(0, 0, 0), -1px 1px 0 rgb(0, 0, 0), -1px 0 0 rgb(0, 0, 0), -1px -1px 0 rgb(0, 0, 0), 0 -1px 0 rgb(0, 0, 0), 1px -1px 0 rgb(0, 0, 0);
+}
+
+.vip, .vipPlus {
+  height: 26vh;
+}
+
+p {
+  text-align: center;
+  margin: 0 auto;
+  color: white;
+  width: 45vw;
+  text-shadow: 1px 0 0 rgb(0, 0, 0), 1px 1px 0 rgb(0, 0, 0), 0 1px 0 rgb(0, 0, 0), -1px 1px 0 rgb(0, 0, 0), -1px 0 0 rgb(0, 0, 0), -1px -1px 0 rgb(0, 0, 0), 0 -1px 0 rgb(0, 0, 0), 1px -1px 0 rgb(0, 0, 0);
+}
+
+#img_vip {
+  z-index: 1;
+  left: 76vw;
+  top: -30vh;
+  width: 11vw;
+  height: auto;
+  position: relative;
+}
+
+#img_vipPlus {
+  z-index: 1;
+  left: 9vw;
+  top: -39vh;
+  width: 18vw;
+  height: auto;
+  position: relative;
+}
+
+.contour_vip {
+  width: 12vw;
+  height: 38vh;
+  border: solid 1px #EA4C6F;
+  position: relative;
+  left: 75vw;
+  bottom: 68vh;
+}
+
+.contour_vipPlus {
+  bottom: 77vh;
+  left: 10vw;
+  width: 12vw;
+  height: 38vh;
+  border: solid 1px #EA4C6F;
+  position: relative;
+}
+
+h2 {
+  color: #EA4C6F;
+  text-align: center;
+  margin: 10vh auto 0;
+}
