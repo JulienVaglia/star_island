@@ -57,7 +57,7 @@
                     <div class="right_nav">
                         <a href="#">
                             <img src="assets/icon/tableau-daffichage.png" alt=""><br> TUTORIEL</a>
-                        <a href="#" class=>
+                        <a href="event.php" class=>
                             <img src="assets/icon/bulle-de-discussion.png" alt=""><br>EVENT</a>
                     </div>
 

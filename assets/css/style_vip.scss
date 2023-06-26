@@ -6,6 +6,7 @@ body {
   background-image: url(../img/backgroundVip.jpg);
   background-size: cover;
   background-position:bottom;
+  height: 100%;
 }
 
 h1 {
@@ -20,6 +21,14 @@ h1 {
   height: 26vh;
 }
 
+.vip {
+  padding-top: 10vh;
+}
+
+.vipPlus {
+  padding-top: 15vh;
+}
+
 p {
   text-align: center;
   margin: 0 auto;
@@ -31,7 +40,7 @@ p {
 #img_vip {
   z-index: 1;
   left: 78vw;
-  top: -30.2vh;
+  top: -36.2vh;
   width: 11vw;
   height: auto;
   position: relative;
@@ -39,24 +48,24 @@ p {
 
 .contour_vip {
   width: 12vw;
-    height: 38vh;
-    border: solid 1px #EA4C6F;
-    position: relative;
-    left: 77vw;
-    bottom: 68vh;
+  height: 38vh;
+  border: solid 1px #EA4C6F;
+  position: relative;
+  left: 77vw;
+  bottom: 74vh;
 }
 
 #img_vipPlus {
   z-index: 1;
   left: 9vw;
-  top: -39vh;
-  width: 18vw;
+  top: -35.1vh;
+  width: 17vw;
   height: auto;
   position: relative;
 }
 
 .contour_vipPlus {
-  bottom: 77vh;
+  bottom: 73vh;
   left: 10vw;
   width: 12vw;
   height: 38vh;
@@ -64,8 +73,17 @@ p {
   position: relative;
 }
 
-h2 {
+h2 a {
   color: #EA4C6F;
+  text-align: center;  
+  text-decoration: none;
+}
+
+h2 a:hover {
+  color: #EA4C6F;
+  
+}
+
+h2 {
   text-align: center;
-  margin: 10vh auto 1.5vh;
 }
