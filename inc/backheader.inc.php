@@ -40,7 +40,7 @@
             <div class="sidebar-brand-icon rotate-n-15">
                 <i class="fas fa-laugh-wink"></i>
             </div>
-            <div class="sidebar-brand-text mx-3">Les Moiss' Admin </sup></div>
+            <div class="sidebar-brand-text mx-3">Star'Island Admin </sup></div>
         </a>
 
         <!-- Divider -->
@@ -73,9 +73,9 @@
         <hr class="sidebar-divider d-none d-md-block">
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="" >
+            <a class="nav-link collapsed" href="<?= BASE_PATH.'back/media_type.php'; ?>" >
                 <i class="fas fa-fw fa-wrench"></i>
-                <span>Gestion caroussel</span>
+                <span>Gestion type de médias</span>
             </a>
         </li>
 
@@ -222,7 +222,7 @@
 
                     <?php foreach ($_SESSION['messages'] as $type => $messages) : ?>
                         <?php foreach ($messages as $message) : ?>
-                            <div class=" w-25 rounded  text-center ml-5  alert alert-<?= $type ?>"><h3><?= $message ?></h3></div>
+                            <div class=" w-25 mx-auto rounded  text-center ml-5  alert alert-<?= $type ?>"><h3><?= $message ?></h3></div>
                         <?php endforeach; ?>
                     <?php endforeach; ?>
                     <?php unset($_SESSION['messages']); ?>

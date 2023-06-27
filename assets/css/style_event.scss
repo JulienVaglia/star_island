@@ -9,6 +9,22 @@ main {
     height: 100%;
 }
 
-h1, h2 {
+h1, h2, p {
+    width: 35vw;
     color: white;
+    text-align: center;
+}
+
+.timerBloc{
+    padding: 17vh 15vw 5vh 50vw;
+}
+
+.eventInfo {
+    padding: 10vh 15vw 5vh 50vw;
+}
+
+#event_img {
+    bottom: 60vh;
+    left: 10vw;
+    position: relative;
 }

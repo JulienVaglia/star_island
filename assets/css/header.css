@@ -1,3 +1,7 @@
+body {
+    overflow: hidden;
+}
+
 .navbar {
     height: 9vh;
 }
@@ -37,6 +41,10 @@
 .nav-link {
     color: white;
     font-size: 18px;
+}
+
+.right_nav {
+    margin-right: 1vw;
 }
 
 .right_nav img {

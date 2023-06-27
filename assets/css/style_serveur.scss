@@ -9,3 +9,84 @@ main {
     height: 100%;
 }
 
+h1 {
+    padding: 10vh 0 6vh;
+    text-align: center;
+    color: white;
+    text-shadow: 1px 0 0 rgb(0, 0, 0), 1px 1px 0 rgb(0, 0, 0), 0 1px 0 rgb(0, 0, 0), -1px 1px 0 rgb(0, 0, 0), -1px 0 0 rgb(0, 0, 0), -1px -1px 0 rgb(0, 0, 0), 0 -1px 0 rgb(0, 0, 0), 1px -1px 0 rgb(0, 0, 0);
+
+}
+
+.btn-group {
+    text-align: center;
+    margin: 0 auto;
+    width: 50%;
+}
+
+.filterBar {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 5vh;
+}
+
+.btn-check {
+    background-color: rgba(7, 7, 7, 0.087);
+}
+
+#button, #startBtn {
+    border-right: none;
+}
+
+#button, #startBtn, #endBtn{
+    border-color: #EA4C6F;
+    color: white;
+    text-shadow: 1px 0 0 rgb(0, 0, 0), 1px 1px 0 rgb(0, 0, 0), 0 1px 0 rgb(0, 0, 0), -1px 1px 0 rgb(0, 0, 0), -1px 0 0 rgb(0, 0, 0), -1px -1px 0 rgb(0, 0, 0), 0 -1px 0 rgb(0, 0, 0), 1px -1px 0 rgb(0, 0, 0);
+    background-color: rgba(255, 255, 255, 0.366);
+}
+
+// #button:disabled, #startBtn:disabled, #endBtn:disabled{
+//     color: white;
+//     border-color: #EA4C6F;
+//     background-color: rgba(255, 255, 255, 0.633);
+// }
+
+#button:hover, #startBtn:hover, #endBtn:hover {
+    background-color: rgba(7, 7, 7, 0.087);
+    border-color: #EA4C6F;
+}
+
+// #button:active, #startBtn:active, #endBtn:active {
+//     background-color: rgba(255, 255, 255, 0.585);
+//     text-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);;
+// }
+
+#startBtn {
+    border-radius: 20px 0 0 20px;
+}
+
+#endBtn {
+    border-radius: 0 20px 20px 0;
+}
+
+.blocImg {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.col {
+    width: 4vw;
+    padding: 2vh 0;
+}
+
+.col img{
+    width: 7vw;
+    height: auto;
+    -webkit-clip-path: polygon(50% 0%, 91% 25%, 50% 100%, 9% 25%);
+    clip-path: polygon(50% 0%, 91% 25%, 50% 100%, 9% 25%);
+}
+
+.div_vide {
+    width: 5vw;
+}
+
