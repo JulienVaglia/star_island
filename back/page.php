@@ -4,9 +4,9 @@
 if (!empty($_POST)) {
 
 
-    if (empty($_POST['title_page'])) {
+    if (empty($_POST['title_page']) || empty($_POST['url_page']) ) {
 
-        $error = 'Ce champs est obligatoire';
+        $error = 'Les deux champs sont obligatoires';
 
     }
 
