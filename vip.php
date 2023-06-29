@@ -10,7 +10,7 @@ require_once 'inc/header.inc.php';
 
     <div class="vip">
 
-        <h2><a href="https://discord.gg/YtHr3hZTc5">VIP</a></h2>
+        <h2><a href="https://discord.gg/YtHr3hZTc5" target="_blank">VIP</a></h2>
 
         <p class="description_vip">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime quam numquam aut accusamus harum optio unde veniam? Doloremque omnis dolorum porro mollitia amet itaque delectus commodi officia qui consequatur impedit voluptates, quisquam autem velit dolorem maxime quaerat a ea blanditiis! Consequuntur facilis ducimus earum exercitationem suscipit, iusto rem nisi corporis tempora accusamus iure qui quos pariatur vitae molestias deserunt quis blanditiis illo optio? Saepe asperiores rem esse excepturi eum porro.</p>
 
@@ -22,7 +22,7 @@ require_once 'inc/header.inc.php';
 
     <div class="vipPlus">
 
-        <h2><a href="https://discord.gg/YtHr3hZTc5">VIP+</a></h2>
+        <h2><a href="https://discord.gg/YtHr3hZTc5" target="_blank">VIP+</a></h2>
 
         <p class="description_vip+">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur distinctio quia asperiores excepturi mollitia similique? Excepturi iste at et necessitatibus ipsum facilis nam eligendi illum officiis tempore voluptatem illo sunt possimus inventore, veritatis veniam quod consequuntur optio, nemo accusamus dolorem! Commodi voluptatibus libero, inventore tenetur quod nisi in ad voluptas voluptatem magnam? Ratione exercitationem placeat natus molestiae, dolores quos id. Voluptatibus perferendis obcaecati similique repudiandae velit minus rerum eius fugiat!</p>
 

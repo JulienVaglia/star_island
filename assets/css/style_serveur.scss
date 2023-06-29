@@ -3,14 +3,16 @@ body {
 }
 
 main {
-    background-image: url(../img/paysage.jpeg);
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),url(../img/paysage.jpeg);
     background-position: center;
     background-size: cover;
     height: 100%;
+    back;
+    
 }
 
 h1 {
-    padding: 10vh 0 6vh;
+    padding: 10vh 0 7vh;
     text-align: center;
     color: white;
     text-shadow: 1px 0 0 rgb(0, 0, 0), 1px 1px 0 rgb(0, 0, 0), 0 1px 0 rgb(0, 0, 0), -1px 1px 0 rgb(0, 0, 0), -1px 0 0 rgb(0, 0, 0), -1px -1px 0 rgb(0, 0, 0), 0 -1px 0 rgb(0, 0, 0), 1px -1px 0 rgb(0, 0, 0);
@@ -26,45 +28,38 @@ h1 {
 .filterBar {
     display: flex;
     justify-content: center;
-    padding-bottom: 5vh;
+    padding-bottom: 4vh;
 }
 
 .btn-check {
     background-color: rgba(7, 7, 7, 0.087);
 }
 
-#button, #startBtn {
-    border-right: none;
-}
+// .mid_btn, .startBtn {
+//     border-right: none;
+// }
 
-#button, #startBtn, #endBtn{
+.btn, .startBtn, .endBtn{
     border-color: #EA4C6F;
     color: white;
     text-shadow: 1px 0 0 rgb(0, 0, 0), 1px 1px 0 rgb(0, 0, 0), 0 1px 0 rgb(0, 0, 0), -1px 1px 0 rgb(0, 0, 0), -1px 0 0 rgb(0, 0, 0), -1px -1px 0 rgb(0, 0, 0), 0 -1px 0 rgb(0, 0, 0), 1px -1px 0 rgb(0, 0, 0);
-    background-color: rgba(255, 255, 255, 0.366);
+    background-color: rgba(7, 7, 7, 0.087);
 }
 
-// #button:disabled, #startBtn:disabled, #endBtn:disabled{
-//     color: white;
-//     border-color: #EA4C6F;
-//     background-color: rgba(255, 255, 255, 0.633);
-// }
-
 #button:hover, #startBtn:hover, #endBtn:hover {
-    background-color: rgba(7, 7, 7, 0.087);
+    background-color: rgb(255, 255, 255);
+    border-color: #EA4C6F;
+}
+.btn-check:checked+.btn, .btn.active, .btn.show, .btn:first-child:active, :not(.btn-check)+.btn:active {
+    background-color:rgba(255, 255, 255, 0.366);
     border-color: #EA4C6F;
 }
 
-// #button:active, #startBtn:active, #endBtn:active {
-//     background-color: rgba(255, 255, 255, 0.585);
-//     text-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);;
-// }
-
-#startBtn {
+.startBtn {
     border-radius: 20px 0 0 20px;
 }
 
-#endBtn {
+.endBtn {
     border-radius: 0 20px 20px 0;
 }
 
@@ -74,19 +69,33 @@ h1 {
     flex-wrap: wrap;
 }
 
-.col {
-    width: 4vw;
-    padding: 2vh 0;
+.container img, svg {
+    vertical-align: middle;
+    width: 10vw;
+    height: auto;
 }
 
-.col img{
-    width: 7vw;
-    height: auto;
+.img_ligne1 {
     -webkit-clip-path: polygon(50% 0%, 91% 25%, 50% 100%, 9% 25%);
     clip-path: polygon(50% 0%, 91% 25%, 50% 100%, 9% 25%);
+    position: relative;
 }
 
-.div_vide {
-    width: 5vw;
+.img_ligne2 img {
+    -webkit-clip-path: polygon(50% 0%, 91% 75%, 50% 100%, 9% 75%);
+    clip-path: polygon(50% 0%, 91% 75%, 50% 100%, 9% 75%);
+}
+
+.img_ligne2 {
+    position: relative;
+    margin-top: -15vh;
+}
+
+h4 {
+    font-size: small;
+    color: rgb(255, 255, 255);
+    position: relative;
+    bottom: 10vh;
+    text-shadow: 1px 0 0 rgb(0, 0, 0), 1px 1px 0 rgb(0, 0, 0), 0 1px 0 rgb(0, 0, 0), -1px 1px 0 rgb(0, 0, 0), -1px 0 0 rgb(0, 0, 0), -1px -1px 0 rgb(0, 0, 0), 0 -1px 0 rgb(0, 0, 0), 1px -1px 0 rgb(0, 0, 0);
 }
 

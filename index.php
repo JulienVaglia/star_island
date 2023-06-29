@@ -9,7 +9,7 @@
 
         <link rel="stylesheet" href="assets/css/style_index.scss">
         <link rel="stylesheet" href="assets/css/style_gallerie.scss">
-        
+
         <section class="bloc1">
 
             <h1>Bienvenue sur Star'Island</h1>
@@ -108,6 +108,30 @@
             <div class="bloc_avis">
 
                 <h2 id="titre_commentaire">Votre avis nous intéresse</h2>
+
+                <!-- Notation etoile -->
+
+                <div class="rating">
+
+                    <input type="radio" name="rating" value="1" id="1">
+                    <label for="1">☆</label>
+
+                    <input type="radio" name="rating" value="2" id="2">
+                    <label for="2">☆</label>
+
+                    <input type="radio" name="rating" value="3" id="3">
+                    <label for="3">☆</label>
+
+                    <input type="radio" name="rating" value="4" id="4">
+                    <label for="4">☆</label>
+
+                    <input type="radio" name="rating" value="5" id="5">
+                    <label for="5">☆</label>
+
+                </div>
+
+
+                <!-- Fin Notation etoile -->
 
                 <textarea name="commentaire" id="commentaire" rows="10" placeholder="Ecrire votre commentaire"></textarea>
                 <button class="publier"> Publier </button>

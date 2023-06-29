@@ -82,9 +82,9 @@
 
         <hr class="sidebar-divider">
         <li class="nav-item">
-            <a class="nav-link collapsed" href="" >
+            <a class="nav-link collapsed" href="<?= BASE_PATH.'back/page.php'; ?>" >
                 <i class="fas fa-fw fa-wrench"></i>
-                <span>Gestion carte resto</span>
+                <span>Gestion des pages</span>
             </a>
         </li>
 

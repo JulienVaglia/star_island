@@ -10,14 +10,14 @@
     <link rel="stylesheet" href="assets/css/header.css">
     <link rel="stylesheet" href="assets/css/footer.css">
     <link rel="stylesheet" href="assets/css/style_barre_lien.css">
-
-
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    
 </head>
 
 <body>
 
     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary ">
+        <nav class="navbar navbar-expand-lg navbar-dark">
             <div class="container-fluid">
                 <a class="navbar-brand" href="<?= BASE_PATH; ?>">
                     <img id="logo" src="assets/img/starisland.png" alt="">
@@ -33,7 +33,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="gallerie.php">GALLERIE</a>
+                            <a class="nav-link" href="gallerie.php" target="_blank">GALLERIE</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="vip.php">DEVENIR VIP</a>
@@ -55,9 +55,9 @@
 
                     </ul>
                     <div class="right_nav">
-                        <a href="#">
-                            <img src="assets/icon/tableau-daffichage.png" alt=""><br> TUTORIEL</a>
-                        <a href="event.php" class=>
+                        <a href="rules.html" target="_blank">
+                            <img src="assets/icon/tableau-daffichage.png" alt=""><br> Règlement</a>
+                        <a href="event.php">
                             <img src="assets/icon/bulle-de-discussion.png" alt=""><br>EVENT</a>
                     </div>
 
