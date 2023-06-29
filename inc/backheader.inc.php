@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Les moissons admin</title>
+    <title>Star'Island admin</title>
 
 
     <!-- Custom fonts for this template-->
@@ -75,7 +75,7 @@
         <li class="nav-item">
             <a class="nav-link collapsed" href="<?= BASE_PATH.'back/media_type.php'; ?>" >
                 <i class="fas fa-fw fa-wrench"></i>
-                <span>Gestion type de médias</span>
+                <span>Gestion des Media Types</span>
             </a>
         </li>
 
@@ -84,16 +84,16 @@
         <li class="nav-item">
             <a class="nav-link collapsed" href="<?= BASE_PATH.'back/page.php'; ?>" >
                 <i class="fas fa-fw fa-wrench"></i>
-                <span>Gestion des pages</span>
+                <span>Gestion des Pages</span>
             </a>
         </li>
 
 
         <hr class="sidebar-divider">
         <li class="nav-item">
-            <a class="nav-link collapsed" href="" >
+            <a class="nav-link collapsed" href="<?= BASE_PATH.'back/content.php'; ?>" >
                 <i class="fas fa-fw fa-wrench"></i>
-                <span>Gestion formule</span>
+                <span>Gestion du Content</span>
             </a>
         </li>
 

@@ -4,7 +4,7 @@
 if (!empty($_POST)) {
 
 
-    if (empty($_POST['title_media_type'])) {
+    if (empty($_POST['title_page'])) {
 
         $error = 'Ce champs est obligatoire';
 
@@ -12,26 +12,28 @@ if (!empty($_POST)) {
 
     if (!isset($error)) {
 
-        if (empty($_POST['id_media_type'])) {
+        if (empty($_POST['id_page'])) {
 
-
-            execute("INSERT INTO media_type (title_media_type) VALUES (:title_media_type)", array(
-                ':title_media_type' => $_POST['title_media_type']
+            execute("INSERT INTO page (title_page, url_page) VALUES (:title_page, :url_page)", array(
+                ':title_page' => $_POST['title_page'],
+                ':url_page' => $_POST['url_page']
             ));
 
-            $_SESSION['messages']['success'][] = 'Média type ajouté';
-            header('location:./media_type.php');
+            $_SESSION['messages']['success'][] = 'Titre et URL de page ajoutés';
+            header('location:./page.php');
             exit();
+
         }// fin soumission en insert
         else {
-
-            execute("UPDATE media_type SET title_media_type=:title WHERE id_media_type=:id", array(
-                ':id' => $_POST['id_media_type'],
-                ':title' => $_POST['title_media_type']
+          
+            execute("UPDATE page SET title_page=:title, url_page=:url WHERE id_page=:id", array(
+                ':id' => $_POST['id_page'],
+                ':title' => $_POST['title_page'],
+                ':url' => $_POST['url_page']
             ));
 
-            $_SESSION['messages']['success'][] = 'Média type modifié';
-            header('location:./media_type.php');
+            $_SESSION['messages']['success'][] = 'Modification effectuée';
+            header('location:./page.php');
             exit();
 
 
@@ -40,34 +42,30 @@ if (!empty($_POST)) {
 
 }// fin !empty $_POST
 
-$medias_type = execute("SELECT * FROM media_type")->fetchAll(PDO::FETCH_ASSOC);
+$pages = execute("SELECT * FROM page")->fetchAll(PDO::FETCH_ASSOC);
 
-//debug($medias_type);
 
 if (!empty($_GET) && isset($_GET['id']) && isset($_GET['a']) && $_GET['a'] == 'edit') {
 
-    $media_type = execute("SELECT * FROM media_type WHERE id_media_type=:id", array(
+    $page = execute("SELECT * FROM page WHERE id_page=:id", array(
         ':id' => $_GET['id']
     ))->fetch(PDO::FETCH_ASSOC);
-    //debug($media_type);
-
-
 }
 
 if (!empty($_GET) && isset($_GET['id']) && isset($_GET['a']) && $_GET['a'] == 'del') {
 
-    $success = execute("DELETE FROM media_type WHERE id_media_type=:id", array(
+    $success = execute("DELETE FROM page WHERE id_page=:id", array(
         ':id' => $_GET['id']
     ));
 
     if ($success) {
-        $_SESSION['messages']['success'][] = 'Type supprimé';
-        header('location:./media_type.php');
+        $_SESSION['messages']['success'][] = 'Titre et URL de page supprimés';
+        header('location:./page.php');
         exit;
 
     } else {
         $_SESSION['messages']['danger'][] = 'Problème de traitement, veuillez réitérer';
-        header('location:./media_type.php');
+        header('location:./page.php');
         exit;
 
 
@@ -81,31 +79,43 @@ require_once '../inc/backheader.inc.php';
 
 
     <form action="" method="post" class="w-75 mx-auto mt-5 mb-5">
+
         <div class="form-group">
             <small class="text-danger">*</small>
-            <label for="media_type" class="form-label">Nom du type de média</label>
-            <input name="title_media_type" id="media_type" placeholder="Nom du type de média" type="text"
-                   value="<?= $media_type['title_media_type'] ?? ''; ?>" class="form-control">
+            <label for="title_page" class="form-label">Nom du titre de page</label>
+            <input name="title_page" id="title_page" placeholder="Entrez votre titre ici" type="text"
+                   value="<?= $page['title_page'] ?? ''; ?>" class="form-control">
             <small class="text-danger"><?= $error ?? ''; ?></small>
         </div>
-        <input type="hidden" name="id_media_type" value="<?= $media_type['id_media_type'] ?? ''; ?>">
+        <input type="hidden" name="id_page" value="<?= $page['id_page'] ?? ''; ?>">
+        <div class="form-group mt-5">
+            <small class="text-danger">*</small>
+            <label for="url_page" class="form-label">URL de la page</label>
+            <input name="url_page" id="url_page" placeholder="Entrez votre URL ici" type="text"
+                   value="<?= $page['url_page'] ?? ''; ?>" class="form-control">
+            <small class="text-danger"><?= $error ?? ''; ?></small>
+        </div>
+        <input type="hidden" name="id_page" value="<?= $page['id_page'] ?? ''; ?>">
         <button type="submit" class="btn btn-primary mt-2">Valider</button>
+
     </form>
 
     <table class="table table-dark table-striped w-75 mx-auto">
         <thead>
         <tr>
             <th>Titre</th>
+            <th class="text-center">URL</th>
             <th class="text-center">Actions</th>
         </tr>
         </thead>
         <tbody>
-        <?php foreach ($medias_type as $media_type): ?>
+        <?php foreach ($pages as $page): ?>
             <tr>
-                <td><?= $media_type['title_media_type']; ?></td>
+                <td><?= $page['title_page']; ?></td>
+                <td class="text-center"><?= $page['url_page']; ?></td>
                 <td class="text-center">
-                    <a href="?id=<?= $media_type['id_media_type']; ?>&a=edit" class="btn btn-outline-info">Modifier</a>
-                    <a href="?id=<?= $media_type['id_media_type']; ?>&a=del" onclick="return confirm('Etes-vous sûr?')"
+                    <a href="?id=<?= $page['id_page']; ?>&a=edit" class="btn btn-outline-info">Modifier</a>
+                    <a href="?id=<?= $page['id_page']; ?>&a=del" onclick="return confirm('Etes-vous sûr?')"
                        class="btn btn-outline-danger">Supprimer</a>
                 </td>
             </tr>
