@@ -4,7 +4,7 @@
 if (!empty($_POST)) {
 
 
-    if (empty($_POST['title_page']) || empty($_POST['url_page']) ) {
+    if (empty($_POST['title_page']) || empty($_POST['title_page'])) {
 
         $error = 'Les deux champs sont obligatoires';
 
