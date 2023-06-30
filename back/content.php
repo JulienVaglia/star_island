@@ -76,6 +76,7 @@ require_once '../inc/backheader.inc.php';
 <!-- Formulaires -->
 <form action="" method="post" class="w-75 mx-auto mt-5 mb-5">
 
+
     <!-- Titre -->
     <div class="form-group">
         <small class="text-danger">*</small>
@@ -90,7 +91,7 @@ require_once '../inc/backheader.inc.php';
 
         <small class="text-danger">*</small>
         <label for="description_content" class="form-label">Description</label>
-        <textarea rows="9" name="description_content" id="description_content" placeholder="Entrez votre description ici" value="<?= $content['description_content'] ?? ''; ?>" class="form-control w-100"></textarea>
+        <textarea rows="5" name="description_content" id="description_content" placeholder="Entrez votre description ici" value="<?= $content['description_content'] ?? ''; ?>" class="form-control w-100"></textarea>
         <small class="text-danger"><?= $error ?? ''; ?></small>
 
     </div>

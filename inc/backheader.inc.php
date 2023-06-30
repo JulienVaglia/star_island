@@ -37,8 +37,8 @@
 
         <!-- Sidebar - Brand -->
         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?=  BASE_PATH.'back/'; ?>">
-            <div class="sidebar-brand-icon rotate-n-15">
-                <i class="fas fa-laugh-wink"></i>
+            <div class="sidebar-brand-icon">
+                <img class="w-100" src="../assets/img/starisland.png" alt="logo">
             </div>
             <div class="sidebar-brand-text mx-3">Star'Island Admin </sup></div>
         </a>
@@ -82,6 +82,14 @@
 
         <hr class="sidebar-divider">
         <li class="nav-item">
+            <a class="nav-link collapsed" href="<?= BASE_PATH.'back/media.php'; ?>" >
+                <i class="fas fa-fw fa-wrench"></i>
+                <span>Gestion des Médias</span>
+            </a>
+        </li>
+
+        <hr class="sidebar-divider">
+        <li class="nav-item">
             <a class="nav-link collapsed" href="<?= BASE_PATH.'back/page.php'; ?>" >
                 <i class="fas fa-fw fa-wrench"></i>
                 <span>Gestion des Pages</span>
@@ -97,14 +105,6 @@
             </a>
         </li>
 
-
-        <hr class="sidebar-divider">
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="" >
-                <i class="fas fa-fw fa-wrench"></i>
-                <span>Gestion bar / cave</span>
-            </a>
-        </li>
 
 
         <hr class="sidebar-divider">
