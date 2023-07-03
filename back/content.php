@@ -59,6 +59,7 @@ if (!empty($_GET) && isset($_GET['id']) && isset($_GET['a']) && $_GET['a'] == 'd
     ));
 
     if ($success) {
+        
         $_SESSION['messages']['success'][] = 'Contenu supprimé';
         header('location:./content.php');
         exit;
