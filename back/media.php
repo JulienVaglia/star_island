@@ -133,30 +133,30 @@ require_once '../inc/backheader.inc.php';
     <div class="form-group mx-auto">
         <small class="text-danger">*</small>
         <label for="id_media_type" class="mt-3">Choisir un type de média</label><br>
-        <select name="id_media_type">
-            <option id="id_media_type" value="<?= $media['id_media_type'] ?? ''; ?>"> --Choisir un type-- </option>
+        <select id="id_media_type" name="id_media_type">
+            <option value="<?= $media['id_media_type'] ?? ''; ?>"> --Choisir un type-- </option>
             <?php
             foreach ($media_types as $media_type) {
-                echo "<option value='$media_type[id_media_type]'>$media_type[title_media_type]</option>";
+                echo "<option class='id_media_type' value='$media_type[id_media_type]'>$media_type[title_media_type]</option>";
             }
             ?>
         </select><br>
         <small class="text-danger"><?= isset($errors['id_media_type']) ? $errors['id_media_type'] : ''; ?></small><br>
     </div>
 
-    <!-- Lien du média -->
-    <div class="form-group" id="fileInput">
+    <!-- File du média -->
+    <div class="form-group" id="image" style="display: none;">
         <small class="text-danger">*</small>
         <label for="image" class="form-label">Sélectionnez un fichier :</label><br>
-        <input type="file" name="image" id="image" class="file-input"><br>
+        <input type="file" name="image"  class="file-input"><br>
         <small class="text-danger"><?= isset($errors['image']) ? $errors['image'] : ''; ?></small>
     </div>
 
     <!-- Lien du média (pour les types de média "lien") -->
-    <div class="form-group" id="lienMediaInput">
+    <div class="form-group" id="lien_media" style="display: none;">
         <small class="text-danger">*</small>
         <label for="lien_media" class="form-label">Entrez le lien :</label><br>
-        <input type="text" name="lien_media" id="lien_media" placeholder="Entrez le lien ici" value="<?= $media['lien_media'] ?? ''; ?>" class="form-control">
+        <input type="text" name="lien_media"  placeholder="Entrez le lien ici" value="<?= $media['lien_media'] ?? ''; ?>" class="form-control">
         <small class="text-danger"><?= isset($errors['lien_media']) ? $errors['lien_media'] : ''; ?></small>
     </div>
 
@@ -196,10 +196,10 @@ require_once '../inc/backheader.inc.php';
 </table>
 
 
-<!-- SCRIPT -->
+<!-- CSS -->
 
 
-<!-- Affichage de l'aperçu plein écran centré -->
+<!-- CSS : apercu plein écran -->
 <style>
     .preview-modal {
         position: fixed;
@@ -219,6 +219,9 @@ require_once '../inc/backheader.inc.php';
         max-height: 90%;
     }
 </style>
+
+
+<!-- SCRIPT -->
 
 <!-- JS : Au clic sur la photo => affichage plein ecran / si click hors photo l'apercu se ferme -->
 <script>
@@ -242,6 +245,40 @@ require_once '../inc/backheader.inc.php';
             }
         });
     });
+</script>
+
+
+<script>
+
+    // Ciblage de la div choix du media_type
+    let select = document.getElementById('id_media_type');
+
+    //Ciblage de la div insertion file
+    let file_input = document.getElementById('image');
+
+    //Ciblage de la div insertion lien
+    let lien_input = document.getElementById('lien_media');
+
+
+        select.addEventListener("change", function() {
+        console.log(select.options[select.selectedIndex].text);
+
+
+        let media_type = select.options[select.selectedIndex].text;
+        console.log(media_type);
+
+        file_input.style.display = 'none';
+        lien_input.style.display = 'none';
+
+        //affichage des input en fonction du choix media_type
+        if (media_type === 'lien') {
+            lien_input.style.display = 'block';
+        } else {
+            file_input.style.display = 'block'
+        }
+
+    })
+
 </script>
 
 <?php require_once '../inc/backfooter.inc.php'; ?>
