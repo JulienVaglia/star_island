@@ -3,8 +3,34 @@
 
 $comments = execute("SELECT * FROM comment");
 
+// Poster le message
+if (!empty($_GET) && isset($_GET['id']) && isset($_GET['a']) && $_GET['a'] == 'edit') {
 
-if (!empty($_GET) && isset($_GET['id']) && isset($_GET['a']) && $_GET['a'] == 'del') {
+    $valid_comment = 1;
+    $success = execute("UPDATE comment SET valid_comment=:valid_comment WHERE id_comment=:id", array(
+        ':id' => $_GET['id'],
+        ':valid_comment' => $valid_comment));
+
+    $_SESSION['messages']['success'][] = 'Message validé pour le bloc avis';
+    header('location:./comment.php');
+    exit;
+    }
+
+    // Cacher le message
+if (!empty($_GET) && isset($_GET['id']) && isset($_GET['a']) && $_GET['a'] == 'hide') {
+
+    $valid_comment = 0;
+    $success = execute("UPDATE comment SET valid_comment=:valid_comment WHERE id_comment=:id", array(
+        ':id' => $_GET['id'],
+        ':valid_comment' => $valid_comment));
+
+    $_SESSION['messages']['success'][] = 'Message caché';
+    header('location:./comment.php');
+    exit;
+    }
+
+    //Supression du message
+if (!empty($_GET) && isset($_GET['id']) && isset($_GET['a']) && $_GET['a'] == 'del')    {
 
     $success = execute("DELETE FROM comment WHERE id_comment=:id", array(
         ':id' => $_GET['id']
@@ -20,7 +46,21 @@ if (!empty($_GET) && isset($_GET['id']) && isset($_GET['a']) && $_GET['a'] == 'd
         header('location:./comment.php');
         exit;
     }
+    }  
+
+
+
+    // debug($avatar_comment);
+    // die;
+
+if (!empty($avatar_comment)) {
+    $imagePath = "media-upload/avatar_comment/" . $avatar_comment[$i];
+        debug($imagePath); die;
 }
+
+
+    
+
 
 require_once '../inc/backheader.inc.php';
 
@@ -39,14 +79,16 @@ require_once '../inc/backheader.inc.php';
     </thead>
     <tbody>
     <?php foreach ($comments as $comment) : ?>
+
         <tr>
             <td class="tri"><?= strftime('%e %B %Y', strtotime($comment['publish_date_comment'])); ?></td>
             <td class="text-center type-comment"><?= $comment['nickname_comment']; ?></td>
             <td class="text-center tri nom-comment"><?= $comment['rating_comment']; ?></td>
-            <td class="text-center"><?= $comment['comment_text'] ?>
+            <td class="text-center"><?= $comment['comment_text'] ?></td>
             <td class="text-center">
-                <a href="?id=<?= $comment['id_comment']; ?>&a=edit" class="btn btn-outline-info">Publier</a>
-                <a href="?id=<?= $comment['id_comment']; ?>&a=del" onclick="return confirm('Etes-vous sûr?')" class="btn btn-outline-danger">Supprimer</a>
+                <a href="?id=<?= $comment['id_comment']; ?>&a=edit" onclick="return confirm('Etes-vous sûr de vouloir poster ?')" class="btn btn-outline-info">Publier</a>
+                <a href="?id=<?= $comment['id_comment']; ?>&a=hide" onclick="return confirm('Etes-vous sûr de vouloir cacher le post ?')" class="btn btn-outline-info">Cacher</a>
+                <a href="?id=<?= $comment['id_comment']; ?>&a=del" onclick="return confirm('Etes-vous sûr ?')" class="btn btn-outline-danger">Supprimer</a>
             </td>
         </tr>
     <?php endforeach; ?>

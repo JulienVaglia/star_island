@@ -20,6 +20,14 @@
         header('location:./index.php');
         exit();
     }
+
+    //Avatar random pour les commentaires
+    $avatar_comment = execute(
+        "SELECT *
+        FROM media m 
+        INNER JOIN media_type mt ON m.id_media_type = mt.id_media_type 
+        WHERE title_media_type = 'avatar_comment'")->fetchAll(PDO::FETCH_ASSOC);
+
     ?>
 
 
@@ -104,11 +112,11 @@
             <!-- Avis client -->
 
             <?php
-            $comments = execute("SELECT * FROM comment ORDER BY publish_date_comment DESC LIMIT 4")->fetchAll(PDO::FETCH_ASSOC);
-
-            // debug($comments);
+            $comments = execute("SELECT * FROM comment WHERE valid_comment = 1 ORDER BY publish_date_comment  DESC LIMIT 4")->fetchAll(PDO::FETCH_ASSOC);
 
             foreach ($comments as $index => $comment) :
+                
+        $i = rand(0, count($avatar_comment)-1);
                 // Utiliser un index permet une incrémentation automatique
             ?>
 
@@ -119,7 +127,7 @@
                        
                         <div class="bulle_avis  col-12 col-sm-5 d-flex align-items-center p-3 <?php echo ($index % 2 == 0) ? 'justify-content-end ' : 'justify-content-end flex-row-reverse ps-5'; ?> ">
                         
-                        <img class="" src="assets/img/carrousssel 8.jpg" alt="" >
+                        <img class="w-7" height="auto" src="./back/media-upload/avatar_comment/<?= $avatar_comment[$i]['name_media'] ?>" alt="" >
                             <div class="col-10 ">                               
                                 <p><?= $comment['nickname_comment'] ?></p>
                                 <div class="rating-stars ">
