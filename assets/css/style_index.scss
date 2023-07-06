@@ -229,6 +229,10 @@ input[type="radio"] {
     border-radius: 15px;
 }
 
+.container img {
+    float: left;
+}
+
 .container2 {
     width: 50vw;
     height: 50vh;
@@ -300,25 +304,9 @@ input[type="radio"] {
     margin: 6vh auto;
 }
 
-.bulle_gauche,
-.bulle_droite {
-    width: 30vw;
-    height: 11vh;
-    margin-bottom: 7vh;
+.bulle_avis {
     background-color: #d2d2d2ad;
-    border: 1px solid #ea4c6e60;
-}
-
-.bulle_gauche {
-    border-radius: 25px 25px 0px 25px;
-    float: left;
-    margin-bottom: 17vh;
-}
-
-.bulle_droite {
-    border-radius: 25px 25px 25px 0px;
-    float: right;
-    margin-top: 13vh;
+    border-radius: 25px;
 }
 
 .bloc_avis {
@@ -329,6 +317,10 @@ input[type="radio"] {
     background-color: rgba(255, 255, 255, 0.229);
     border-radius: 10px;
     border: 2px solid black;
+}
+
+span {
+    font-size:x-small;
 }
 
 h2 {
@@ -363,9 +355,8 @@ textarea {
     scale: 1.1;
 }
 
-.bloc_commentaire img {
-    border-radius: 50%;
-    width: 8vw;
+.bulle_avis img {   
+    width: 13vw;
     height: auto;
     clip-path: circle(30%);
 }

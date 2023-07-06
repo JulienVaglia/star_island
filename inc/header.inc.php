@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="assets/css/footer.css">
     <link rel="stylesheet" href="assets/css/style_barre_lien.css">
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    
+    <link href="assets/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
@@ -65,3 +65,4 @@
             </div>
         </nav>
     </header>
+

@@ -25,13 +25,13 @@ if ((!empty($_POST) && !empty($_FILES)) || (!empty($_POST['lien_media']))) {
         // récuperation du media_type selectionné
         $mt = execute("SELECT * FROM media_type WHERE id_media_type='$_POST[id_media_type]'")->fetch();
 
-        if (!file_exists('upload/')) {
-            mkdir('upload/', 777);
+        if (!file_exists('media-upload/')) {
+            mkdir('media-upload/', 777);
         }
 
         // Créer des sous dossiers en fonction du type média
-        if (!file_exists('upload/' . $mt['title_media_type'])) {
-            mkdir('upload/' . $mt['title_media_type'], 777);
+        if (!file_exists('media-upload/' . $mt['title_media_type'])) {
+            mkdir('media-upload/' . $mt['title_media_type'], 777);
         }
 
 
@@ -45,7 +45,7 @@ if ((!empty($_POST) && !empty($_FILES)) || (!empty($_POST['lien_media']))) {
             $titre_du_media = uniqid() . date_format(new DateTime(), 'd_m_Y_H_i_s') . '_' . $_FILES['image']['name'];
             $alt_du_media = $_POST['title_media'];
 
-            copy($_FILES['image']['tmp_name'], 'upload/' . $mt['title_media_type'] . '/' . $titre_du_media);
+            copy($_FILES['image']['tmp_name'], 'media-upload/' . $mt['title_media_type'] . '/' . $titre_du_media);
         }
 
 
@@ -80,14 +80,14 @@ if (!empty($_GET) && isset($_GET['id']) && isset($_GET['a']) && $_GET['a'] == 'd
 
     $success_database = false;
 
-    if ($file_path['title_media_type'] === "lien" ) {
+    if ($file_path['title_media_type'] === "lien") {
         $success_arborescence = true;
     } else {
-    // création du unlink pour suppression du fichier du dossier upload
+        // création du unlink pour suppression du fichier du dossier media/upload
 
-    $file_path = "upload/$file_path[title_media_type]/$file_path[name_media]";
+        $file_path = "media-upload/$file_path[title_media_type]/$file_path[name_media]";
 
-    $success_arborescence = unlink($file_path);
+        $success_arborescence = unlink($file_path);
     }
 
     if ($success_arborescence) {
@@ -117,6 +117,10 @@ require_once '../inc/backheader.inc.php';
     <!-- Choix de page -->
     <?php
     $pages = execute("SELECT * FROM page")->fetchAll(PDO::FETCH_ASSOC);
+
+        //Liste des pages à exclure du choix
+    $pages_exclues = array ('Serveur');
+
     ?>
     <div class="form-group mx-auto">
         <small class="text-danger">*</small>
@@ -125,8 +129,9 @@ require_once '../inc/backheader.inc.php';
             <option id="id_page" value="<?= $media['id_page'] ?? ''; ?>"> --Choisir une page-- </option>
             <?php
             foreach ($pages as $page) {
-                echo "<option value='$page[id_page]'>$page[title_page]</option>";
-            }
+                if (!in_array($page['title_page'], $pages_exclues)) {
+                    echo "<option value='$page[id_page]'>$page[title_page]</option>";
+                }}
             ?>
         </select><br>
         <small class="text-danger"><?= isset($errors['id_page']) ? $errors['id_page'] : ''; ?></small>
@@ -188,40 +193,36 @@ require_once '../inc/backheader.inc.php';
         <tr>
             <th>Page</th>
             <th class="text-center" data-column="type-media">Type de média <i class="fas fa-sort tri"></i></th>
-            <th class="text-center w-50">Aperçu</th>
             <th class="text-center" data-column="nom-media">Nom du média <i class="fas fa-sort tri"></i></th>
+            <th class="text-center w-25">Aperçu</th>
             <th class="text-center">Actions</th>
         </tr>
     </thead>
     <tbody>
         <?php foreach ($medias as $media) :
-                if ($media['title_page'] !== 'Serveur') { ?>
-            <tr>
+            if ($media['title_page'] !== 'Serveur') { ?>
+                <tr>
 
-                <td><?= $media['title_page']; ?></td>
-                <td class="text-center tri type-media"><?= $media['title_media_type']; ?></td>
+                    <td><?= $media['title_page']; ?></td>
+                    <td class="text-center tri type-media"><?= $media['title_media_type']; ?></td>
+                    <td class="text-center tri nom-media"><?= $media['title_media']; ?></td>
 
-                <?php if ($media['title_media_type'] === 'lien') { ?>
+                    <?php if ($media['title_media_type'] === 'lien') { ?>
+                        <td class="text-center">
+                            <?= $media['name_media'] ?>
+                        </td>
+                    <?php } else { ?>
+                        <td class="text-center">
+                            <img src="media-upload/<?= $media['title_media_type'] ?>/<?= $media['name_media'] ?>" alt="<?= $media['title_media'] ?>" width="70" height="70" class="media-preview" data-src="media-upload/<?= $media['title_media_type'] ?>/<?= $media['name_media'] ?>">
+                        </td>
+                    <?php } ?>
+
                     <td class="text-center">
-                        <?= $media['name_media'] ?>
+                        <a href="?id=<?= $media['id_media']; ?>&a=del" onclick="return confirm('Etes-vous sûr?')" class="btn btn-outline-danger">Supprimer</a>
                     </td>
-                <?php } else { ?>
-                    <td class="text-center">
-                        <img src="upload/<?= $media['title_media_type'] ?>/<?= $media['name_media'] ?>" alt="<?= $media['title_media'] ?>" width="70" height="70" class="media-preview" data-src="upload/<?= $media['title_media_type'] ?>/<?= $media['name_media'] ?>">
-                    </td>
-                <?php } ?>
-
-                <td class="text-center tri nom-media"><?= $media['title_media']; ?></td>
-
-
-
-
-
-                <td class="text-center">
-                    <a href="?id=<?= $media['id_media']; ?>&a=del" onclick="return confirm('Etes-vous sûr?')" class="btn btn-outline-danger">Supprimer</a>
-                </td>
-            </tr>
-        <?php } endforeach; ?>
+                </tr>
+        <?php }
+        endforeach; ?>
     </tbody>
 </table>
 

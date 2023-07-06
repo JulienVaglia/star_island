@@ -1,6 +1,25 @@
     <?php
+
     require_once 'config/function.php';
     require_once 'inc/header.inc.php';
+
+
+    if (!empty($_POST)) {
+        // debug($_POST);
+
+
+
+        execute("INSERT INTO comment (publish_date_comment, nickname_comment, rating_comment, comment_text) VALUES (:publish_date_comment, :nickname_comment, :rating_comment, :comment_text)", array(
+            ':publish_date_comment' => date_format(new DateTime(), 'Y-m-d'),
+            ':nickname_comment' => $_POST['nickname_comment'],
+            ':rating_comment' => $_POST['rating_comment'],
+            ':comment_text' => $_POST['comment_text']
+        ));
+
+        $_SESSION['comment_success'] = true; // Stocker le succès de la soumission du commentaire
+        header('location:./index.php');
+        exit();
+    }
     ?>
 
 
@@ -82,64 +101,108 @@
 
         <section class="bloc2">
 
-            <!-- Notation etoiles -->
+            <!-- Avis client -->
 
-            <div class="avis_client">
-                <div class="bloc_commentaire">
+            <?php
+            $comments = execute("SELECT * FROM comment ORDER BY publish_date_comment DESC LIMIT 4")->fetchAll(PDO::FETCH_ASSOC);
 
-                    <div class="bulle_gauche">
-                        <img src="assets/img/carrousssel 8.jpg" alt="">
-                    </div>
+            // debug($comments);
 
-                    <div class="bulle_droite">
-                        <img src="assets/img/carrousssel 8.jpg" alt="">
-                    </div>
+            foreach ($comments as $index => $comment) :
+                // Utiliser un index permet une incrémentation automatique
+            ?>
 
-                    <div class="bulle_gauche">
-                        <img src="assets/img/carrousssel 8.jpg" alt="">
-                    </div>
+                <div class=" container  ">
 
-                    <div class="bulle_droite">
-                        <img src="assets/img/carrousssel 8.jpg" alt="">
+                    <div class="row justify-content-center justify-content-sm-start  <?php echo ($index % 2 == 0) ? 'flex-row' : 'flex-row-reverse'; ?>">
+                        <!-- Permet l'affichage en décalé des bulles d'avis selon si l'index de $comment est pair ou impair -->
+                       
+                        <div class="bulle_avis  col-12 col-sm-5 d-flex align-items-center p-3 <?php echo ($index % 2 == 0) ? 'justify-content-end ' : 'justify-content-end flex-row-reverse ps-5'; ?> ">
+                        
+                        <img class="" src="assets/img/carrousssel 8.jpg" alt="" >
+                            <div class="col-10 ">                               
+                                <p><?= $comment['nickname_comment'] ?></p>
+                                <div class="rating-stars ">
+                                    <?php
+                                    $rating = $comment['rating_comment'];
+
+                                    for ($i = 1; $i <= 5; $i++) {
+                                        if ($i <= $rating) {
+                                            echo '<i class="fas fa-star text-warning"></i>';
+                                        } else {
+                                            echo '<i class="fas fa-star text-dark"></i>';
+                                        }
+                                    }
+                                    ?>
+                                    <span></span> Publié le : <?= $comment['publish_date_comment'] ?>
+                                </div>
+                                <p><?= $comment['comment_text'] ?></p>                            
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
+            <?php endforeach; ?>
 
-            <div class="bloc_avis">
+            <form method="post" class="bloc_avis">
 
                 <h2 id="titre_commentaire">Votre avis nous intéresse</h2>
 
                 <!-- Notation etoile -->
 
-                <div class="rating">
-
-                    <input type="radio" name="rating" value="1" id="1">
-                    <label for="1">☆</label>
-
-                    <input type="radio" name="rating" value="2" id="2">
-                    <label for="2">☆</label>
-
-                    <input type="radio" name="rating" value="3" id="3">
-                    <label for="3">☆</label>
-
-                    <input type="radio" name="rating" value="4" id="4">
-                    <label for="4">☆</label>
-
-                    <input type="radio" name="rating" value="5" id="5">
-                    <label for="5">☆</label>
-
+                <div class="d-flex justify-content-around mb-3 px-5 rating">
+                    <i class="fas fa-star fa-2x star-avis"></i>
+                    <i class="fas fa-star fa-2x star-avis"></i>
+                    <i class="fas fa-star fa-2x star-avis"></i>
+                    <i class="fas fa-star fa-2x star-avis"></i>
+                    <i class="fas fa-star fa-2x star-avis"></i>
                 </div>
+                <input type="hidden" name="rating_comment" id="rating_comment">
 
+                <input class="form-control w-50 mx-auto" type="text" name="nickname_comment" placeholder="Pseudo">
 
                 <!-- Fin Notation etoile -->
 
-                <textarea name="commentaire" id="commentaire" rows="10" placeholder="Ecrire votre commentaire"></textarea>
-                <button class="publier"> Publier </button>
-            </div>
+                <textarea name="comment_text" id="comment_text" rows="10" placeholder="Ecrire votre commentaire"></textarea>
+                <button type="submit" class="publier"> Publier </button>
+            </form>
 
             <div class="fondu2"></div>
 
         </section>
 
     </main>
-    <?php require_once 'inc/footer.inc.php';          ?>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Gestion des étoiles dans "votre avis nous interesse"
+            const stars = document.querySelectorAll(".fas.fa-star.star-avis");
+
+            for (let index = 0; index < stars.length; index++) {
+                stars[index].classList.add('text-dark');
+
+                stars[index].addEventListener('click', () => {
+                    console.log(stars[index]);
+                    for (let i = 0; i < stars.length; i++) {
+                        if (i <= index) {
+                            stars[i].classList.remove('text-dark');
+                            stars[i].classList.add('text-warning');
+                            document.getElementById('rating_comment').value = i + 1;
+                        } else {
+                            stars[i].classList.remove('text-warning');
+                            stars[i].classList.add('text-dark');
+                        }
+                    }
+                });
+            }
+        })
+    </script>
+
+    <?php
+    // Vérifiez si la variable de session est définie et affichez le message de soumission
+    if (isset($_SESSION['comment_success']) && $_SESSION['comment_success']) {
+        echo '<script>setTimeout(function(){ alert("Votre commentaire a été soumis avec succès !"); }, 150);</script>'; // Affichez le message pendant 3 secondes (150 millisecondes)
+        unset($_SESSION['comment_success']);
+    }
+
+    require_once 'inc/footer.inc.php';
+    ?>
