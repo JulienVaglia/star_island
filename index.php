@@ -22,12 +22,8 @@
     }
 
     //Avatar random pour les commentaires
-    $avatar_comment = execute(
-        "SELECT *
-        FROM media m 
-        INNER JOIN media_type mt ON m.id_media_type = mt.id_media_type 
-        WHERE title_media_type = 'avatar_comment'")->fetchAll(PDO::FETCH_ASSOC);
-
+    $avatar_comment = execute("SELECT *FROM media m INNER JOIN media_type mt ON m.id_media_type = mt.id_media_type WHERE title_media_type = 'avatar_comment'")->fetchAll(PDO::FETCH_ASSOC);
+    
     ?>
 
 

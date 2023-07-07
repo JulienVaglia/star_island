@@ -111,26 +111,26 @@
         <li class="nav-item">
             <a class="nav-link collapsed" href="<?= BASE_PATH.'back/comment.php'; ?>" >
                 <i class="fas fa-fw fa-wrench"></i>
-                <span>Gestion des commentaires</span>
+                <span>Gestion des Commentaires</span>
             </a>
         </li>
 
 
         <hr class="sidebar-divider">
         <li class="nav-item">
-            <a class="nav-link collapsed"   href=""   >
+            <a class="nav-link collapsed"   href="<?= BASE_PATH.'back/event.php'; ?>"   >
 
                 <i class="fas fa-fw fa-wrench"></i>
-                <span>Gestion evènements</span>
+                <span>Gestion Event</span>
             </a>
         </li>
 
 
         <hr class="sidebar-divider">
         <li class="nav-item">
-            <a class="nav-link collapsed" href=""  >
+            <a class="nav-link collapsed" href="<?= BASE_PATH.'back/team.php'; ?>"  >
                 <i class="fas fa-fw fa-wrench"></i>
-                <span>Gestion newsletter</span>
+                <span>Gestion de l'Equipe</span>
             </a>
         </li>
 

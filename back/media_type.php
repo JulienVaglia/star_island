@@ -42,15 +42,11 @@ if (!empty($_POST)) {
 
 $medias_type = execute("SELECT * FROM media_type")->fetchAll(PDO::FETCH_ASSOC);
 
-//debug($medias_type);
-
 if (!empty($_GET) && isset($_GET['id']) && isset($_GET['a']) && $_GET['a'] == 'edit') {
 
     $media_type = execute("SELECT * FROM media_type WHERE id_media_type=:id", array(
         ':id' => $_GET['id']
     ))->fetch(PDO::FETCH_ASSOC);
-    //debug($media_type);
-
 
 }
 
@@ -74,7 +70,6 @@ if (!empty($_GET) && isset($_GET['id']) && isset($_GET['a']) && $_GET['a'] == 'd
     }
 
 }
-
 
 require_once '../inc/backheader.inc.php';
 ?>

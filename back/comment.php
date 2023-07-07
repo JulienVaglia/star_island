@@ -48,11 +48,6 @@ if (!empty($_GET) && isset($_GET['id']) && isset($_GET['a']) && $_GET['a'] == 'd
     }
     }  
 
-
-
-    // debug($avatar_comment);
-    // die;
-
 if (!empty($avatar_comment)) {
     $imagePath = "media-upload/avatar_comment/" . $avatar_comment[$i];
         debug($imagePath); die;

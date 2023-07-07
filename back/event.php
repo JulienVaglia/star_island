@@ -36,7 +36,8 @@ if ((!empty($_POST) && !empty($_FILES)) || (!empty($_POST['lien_media']))) {
 
 
         if (!empty($_POST['lien_media'])) {
-
+            // debug($_POST);
+            // die();
             $titre_du_media = $_POST['lien_media'];
             $alt_du_media = $_POST['title_media'];
         } else {
@@ -61,13 +62,13 @@ if ((!empty($_POST) && !empty($_FILES)) || (!empty($_POST['lien_media']))) {
         exit();
     } // fin soumission en insert
 
-
+    
     else {
 
         execute("UPDATE media SET title_media=:title WHERE id_media=:id", array(
             ':id' => $_POST['id_media'],
             ':title' => $_POST['title_media']
-        ));  
+        )); 
 
         execute("UPDATE media SET name_media=:title WHERE id_media=:id", array(
             ':id' => $_POST['id_media'],
@@ -87,7 +88,7 @@ $medias = execute("SELECT m.*, p.*, mt.* FROM media m INNER JOIN page p ON m.id_
 
 if (!empty($_GET) && isset($_GET['id']) && isset($_GET['a']) && $_GET['a'] == 'edit') {
 
-    $media = execute("SELECT * FROM media m WHERE id_media=:id", array(
+    $media = execute("SELECT * FROM media WHERE id_media=:id", array(
         ':id' => $_GET['id']
     ))->fetch(PDO::FETCH_ASSOC);
 }
@@ -141,7 +142,6 @@ require_once '../inc/backheader.inc.php';
     $pages_exclues = array('Serveur');
 
     ?>
-    
     <div class="form-group mx-auto">
         <small class="text-danger">*</small>
         <label for="id_page">Choisir une page</label><br>
@@ -176,9 +176,8 @@ require_once '../inc/backheader.inc.php';
         <select id="id_media_type" name="id_media_type">
             <option value="<?= $media['id_media_type'] ?? ''; ?>"> --Choisir un type-- </option>
             <?php
-            foreach ($media_types as $media_type) { 
-                
-                echo "<option class='id_media_type' value='$media_type[id_media_type]'  >$media_type[title_media_type]</option>";
+            foreach ($media_types as $media_type) {
+                echo "<option class='id_media_type' value='$media_type[id_media_type]'>$media_type[title_media_type]</option>";
             }
             ?>
         </select><br>
