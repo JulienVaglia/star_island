@@ -260,7 +260,7 @@ require_once '../inc/backheader.inc.php';
 
                     if ($media['title_media_type'] == 'lien') { ?>
                         <td>
-                            <a href="?id=<?= $media['id_media']; ?>&a=edit" class="btn btn-outline-info">Modifier</a>
+                            <a href="?id=<?= $media['id_media']; ?>&a=edit" onclick="return confirm('Merci de resaisir toutes les informations')" class="btn btn-outline-info">Modifier</a>
                         </td>
 
                     <?php } else {
