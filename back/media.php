@@ -69,11 +69,6 @@ if ((!empty($_POST) && !empty($_FILES)) || (!empty($_POST['lien_media']))) {
             ':title' => $_POST['title_media']
         ));  
 
-        execute("UPDATE media SET name_media=:title WHERE id_media=:id", array(
-            ':id' => $_POST['id_media'],
-            ':name' => $_POST['name_media']
-        ));
-
         $_SESSION['messages']['success'][] = 'Lien modifié';
         header('location:./media.php');
         exit();

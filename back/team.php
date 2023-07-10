@@ -2,8 +2,10 @@
 require_once '../config/function.php';
 require_once '../inc/backheader.inc.php';
 
-if ((!empty($_POST) && !empty($_FILES))) {
-    die('coucou');
+$errors = array();
+
+if (!empty($_POST)) {
+
     if (empty($_POST['nickname_team'])) {
         $errors[] = 'Choix du pseudo obligatoire';
     }
@@ -12,48 +14,53 @@ if ((!empty($_POST) && !empty($_FILES))) {
         $errors[] = 'Choix du rôle obligatoire';
     }
 
-    if (empty($_FILES['avatar']['name'])) {
-        $errors[] = "Choix de l'avatar obligatoire";
-    }
-
     if (empty($errors)) {
-        $lastNickname_team = $pdo->lastInsertId();
 
-        // Exécution de la requête d'insertion pour la table media
-        $lastMediaId = $pdo->lastInsertId();
+        // Insertion des données dans la table "team"
+        $nickname_team = $_POST['nickname_team'];
+        $role_team = $_POST['role_team'];
 
-        $avatar_team = $pdo->execute("INSERT INTO media (id_media, title_media, name_media, id_media_type) VALUES (:id_media, :title_media, :name_media, :id_media_type)", array(
-            ':id_media' => $lastMediaId,
-            ':title_media' => $_POST['nickname_team'],
-            ':name_media' => $_POST['role_team'],
-            ':id_media_type' => $_POST['id_media_type']
+        $teamId = execute("INSERT INTO team (nickname_team, role_team) VALUES (:nickname_team, :role_team)", array(
+            ':nickname_team' => $nickname_team,
+            ':role_team' => $role_team
+        ), true);
+
+
+        // Insertion des données dans la table "media"
+        $title_media = $nickname_team;
+        $name_media = $_POST['role_team'];
+
+        $mediaId = execute("INSERT INTO media (title_media, name_media) VALUES (:title_media, :name_media)", array(
+            ':title_media' => $title_media,
+            ':name_media' => $name_media
+        ), true);
+
+        // Insertion des données dans la table intermédiaire "team_media"
+        execute("INSERT INTO team_media (id_team, id_media) VALUES (:id_team, :id_media)", array(
+            ':id_team' => $teamId,
+            ':id_media' => $mediaId
         ));
-        debug($avatar_team);
 
-        // Récupérer l'ID du média inséré
-        $id_media = $pdo->lastInsertId();
-
-        // Insérer les données dans la table intermédiaire "team_media"
-        $pdo->execute("INSERT INTO team_media (id_team, id_media) VALUES (:id_team, :id_media)", array(
-            ':id_team' => $id_team,
-            ':id_media' => $id_media
-        ));
+        $_SESSION['messages']['success'][] = 'Profil ajouté';
+        header('location:./team.php');
+        exit();
     }
 }
 
-//Jointure team et media par table intermédiaire team_media
-$medias = $pdo->execute("
+// Requête avec jointure pour récupérer les données de team avec leurs médias associés ( media )
+$profils = execute("
     SELECT team.nickname_team, team.role_team, media.title_media, media.name_media
     FROM team
     JOIN team_media ON team.id_team = team_media.id_team
     JOIN media ON media.id_media = team_media.id_media
 ")->fetchAll(PDO::FETCH_ASSOC);
-debug($medias);
+
 ?>
 
 <div class="container team w-75 rounded ">
     <!-- Formulaires -->
     <form action="" method="post" enctype="multipart/form-data" class="w-25 mt-5 mb-5 form-container">
+
 
         <!-- Nickname -->
         <div class="form-group mx-4">
@@ -62,6 +69,7 @@ debug($medias);
             <input name="nickname_team" id="nickname_team" placeholder="Entrez le nickname ici" type="text" value="<?= $media['nickname_team'] ?? ''; ?>" class="form-control">
             <small class="text-danger"><?= isset($errors['nickname_team']) ? $errors['nickname_team'] : ''; ?></small>
         </div>
+
 
         <!-- Rôle -->
         <div class="form-group mx-4">
@@ -78,7 +86,8 @@ debug($medias);
             <small class="text-danger"><?= isset($errors['role_team']) ? $errors['role_team'] : ''; ?></small><br>
         </div>
 
-        <!-- File du média -->
+
+        <!-- Avatar -->
         <div class="form-group mx-4 my-3" id="avatar">
             <small class="text-danger">*</small>
             <label for="avatar" class="form-label">Sélectionnez un avatar :</label><br>
@@ -88,39 +97,63 @@ debug($medias);
 
         <br>
 
-        <div class="mx-4">
+
+        <!-- Réseaux sociaux -->
+        <div class="mx-4" id="reseaux_sociaux">
             <small class="text-danger">*</small>
             <label class="mb-3" for="reseaux">Sélectionnez les réseaux :</label>
-            <form>
-                <label class="mx-4 my-1" for="choix1"><input type="checkbox" id="choix1" name="selection[]" value="choix1"> &nbsp<img src="../assets/icon/logo discord.png" alt="Discord"> Discord</label>
-                <label class="mx-4 my-1" for="choix2"><input type="checkbox" id="choix2" name="selection[]" value="choix2"> &nbsp<img src="../assets/icon/twitch.png" alt="twitch"> twitch </label>
-                <label class="mx-4 my-1" for="choix3"><input type="checkbox" id="choix3" name="selection[]" value="choix3"> &nbsp<img src="../assets/icon/youtube.png" alt="Youtube"> Youtube</label>
-                <label class="mx-4 my-1" for="choix4"><input type="checkbox" id="choix4" name="selection[]" value="choix4"> &nbsp<img src="../assets/icon/tiktok.png" alt="Tiktok"> Tiktok</label>
-                <label class="mx-4 my-1" for="choix5"><input type="checkbox" id="choix5" name="selection[]" value="choix5"> &nbsp<img src="../assets/icon/facebook.png" alt="Facebook"> Facebook</label>
-                <label class="mx-4 my-1" for="choix6"><input type="checkbox" id="choix6" name="selection[]" value="choix6"> &nbsp<img src="../assets/icon/instagram.png" alt="Instagram"> Instagram</label>
-                <label class="mx-4 my-1" for="choix7"><input type="checkbox" id="choix7" name="selection[]" value="choix7"> &nbsp<img src="../assets/icon/twitter.png" alt="Instagram"> Twitter</label>
-                <style>
-                    label img {
-                        width: 1.5vw;
-                        height: auto;
-                    }
-                </style>
-            </form>
+
+            <label class="mx-4 my-1" for="discord">
+                <input type="checkbox" id="discord" value="discord" onclick="champs_reseau('discord')"> &nbsp;
+                <img src="../assets/icon/logo discord.png" alt="Discord"> Discord
+            </label>
+            <input class="input_reseaux" type="text" id="input_discord" name="selection['discord']" placeholder="Saisir l'adresse Discord">
+
+            <label class="mx-4 my-1" for="twitch">
+                <input type="checkbox" id="twitch" value="twitch" onclick="champs_reseau('twitch')"> &nbsp;
+                <img src="../assets/icon/twitch.png" alt="Twitch"> Twitch
+            </label>
+            <input class="input_reseaux" type="text" id="input_twitch" name="selection['twitch']" placeholder="Saisir l'adresse Twitch">
+
+            <label class="mx-4 my-1" for="youtube">
+                <input type="checkbox" id="youtube" value="youtube" onclick="champs_reseau('youtube')"> &nbsp;
+                <img src="../assets/icon/youtube.png" alt="Youtube"> Youtube
+            </label>
+            <input class="input_reseaux" type="text" id="input_youtube" name="selection['Youtube']" placeholder="Saisir l'adresse Youtube">
+
+            <label class="mx-4 my-1" for="tiktok">
+                <input type="checkbox" id="tiktok" value="tiktok" onclick="champs_reseau('tiktok')"> &nbsp;
+                <img src="../assets/icon/tiktok.png" alt="Tiktok"> Tiktok
+            </label>
+            <input class="input_reseaux" type="text" id="input_tiktok" name="selection['Tiktok']" placeholder="Saisir l'adresse Tiktok">
+
+            <label class="mx-4 my-1" for="facebook">
+                <input type="checkbox" id="facebook" value="facebook" onclick="champs_reseau('facebook')"> &nbsp;
+                <img src="../assets/icon/facebook.png" alt="Facebook"> Facebook
+            </label>
+            <input class="input_reseaux" type="text" id="input_facebook" name="selection['Facebook']" placeholder="Saisir l'adresse Facebook">
+
+            <label class="mx-4 my-1" for="instagram">
+                <input type="checkbox" id="instagram" value="instagram" onclick="champs_reseau('instagram')"> &nbsp;
+                <img src="../assets/icon/instagram.png" alt="Instagram"> Instagram
+            </label>
+            <input class="input_reseaux" type="text" id="input_instagram" name="selection['Instagram']" placeholder="Saisir l'adresse Instagram">
+
+            <label class="mx-4 my-1" for="twitter">
+                <input type="checkbox" id="twitter" value="twitter" onclick="champs_reseau('twitter')"> &nbsp;
+                <img src="../assets/icon/twitter.png" alt="Twitter"> Twitter
+            </label>
+            <input class="input_reseaux" type="text" id="input_twitter" name="selection['Twitter']" placeholder="Saisir l'adresse Twitter">
+
             <small class="text-danger"><?= isset($errors['reseau']) ? $errors['reseau'] : ''; ?></small>
         </div>
-        <!-- Fin Formulaires -->
 
-        <button type="submit" class="btn btn-primary mx-5">Créer le profil
-            <style>
-                button {
-                    position: relative;
-                    margin-top: 35vh;
-                    left: 4vw;
-                }
-            </style>
+    
+        <button type="submit" class="mt-3 ms-5 btn btn-primary mx-5">Créer le profil
         </button>
 
     </form>
+    <!-- Fin Formulaires -->
 
 
     <!-- Apercu -->
@@ -200,7 +233,7 @@ debug($medias);
         </tr>
     </thead>
     <tbody>
-        <?php foreach ($medias as $media) : ?>
+        <?php foreach ($profils as $profil) : ?>
 
             <tr>
                 <td class="text-center tri type-media"><?= $team['nickname_team']; ?></td>
@@ -226,7 +259,23 @@ debug($medias);
 
 
 
+<!-- Javascript -->
+<script>
+                function champs_reseau(checkboxId) {
+                    let checkbox = document.getElementById(checkboxId);
+                    let input = document.getElementById('input_' + checkboxId);
 
+                    if (checkbox.checked) {
+                        input.style.display = 'block';
+                    } else {
+                        input.style.display = 'none';
+                    }
+                }
+            </script>
+
+
+
+<!-- CSS -->
 <style>
     .team {
         display: flex;
@@ -241,5 +290,33 @@ debug($medias);
 
     .preview-container {
         width: 40%;
+    }
+
+    button {
+        position: relative;
+        left: 23vw;
+        bottom: 34vh;
+    }
+
+    ::placeholder {
+        padding-left: 0.5vw;
+        margin-bottom: 0.5vh;
+    }
+
+    #reseaux_sociaux input {
+        margin-bottom: 0.8vh;
+    }
+
+    .input_reseaux {
+        display: none;
+    }
+
+    .input_reseaux {
+        display: none;
+    }
+
+    label img {
+        width: 1.5vw;
+        height: auto;
     }
 </style>
