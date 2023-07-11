@@ -37,14 +37,14 @@ if ((!empty($_POST) && !empty($_FILES)) || (!empty($_POST['lien_media']))) {
 
         if (!empty($_POST['lien_media'])) {
 
-            $titre_du_media = $_POST['lien_media'];
+            $chemin = $_POST['lien_media'];
             $alt_du_media = $_POST['title_media'];
         } else {
 
-            $titre_du_media = uniqid() . date_format(new DateTime(), 'd_m_Y_H_i_s') . '_' . $_FILES['image']['name'];
+            $chemin = uniqid() . date_format(new DateTime(), 'd_m_Y_H_i_s') . '_' . $_FILES['image']['name'];
             $alt_du_media = $_POST['title_media'];
 
-            copy($_FILES['image']['tmp_name'], 'media-upload/' . $mt['title_media_type'] . '/' . $titre_du_media);
+            copy($_FILES['image']['tmp_name'], 'media-upload/' . $mt['title_media_type'] . '/' . $chemin);
         }
 
         //Fin de création de sous dossier
@@ -52,7 +52,7 @@ if ((!empty($_POST) && !empty($_FILES)) || (!empty($_POST['lien_media']))) {
         execute("INSERT INTO media (id_page, title_media, name_media, id_media_type) VALUES (:id_page, :title_media, :name_media, :id_media_type)", array(
             ':id_page' => $_POST['id_page'],
             ':title_media' => $alt_du_media,
-            ':name_media' => $titre_du_media,
+            ':name_media' => $chemin,
             ':id_media_type' => $_POST['id_media_type']
         ));
 
@@ -67,7 +67,7 @@ if ((!empty($_POST) && !empty($_FILES)) || (!empty($_POST['lien_media']))) {
         execute("UPDATE media SET title_media=:title WHERE id_media=:id", array(
             ':id' => $_POST['id_media'],
             ':title' => $_POST['title_media']
-        ));  
+        ));
 
         $_SESSION['messages']['success'][] = 'Lien modifié';
         header('location:./media.php');
@@ -136,7 +136,7 @@ require_once '../inc/backheader.inc.php';
     $pages_exclues = array('Serveur');
 
     ?>
-    
+
     <div class="form-group mx-auto">
         <small class="text-danger">*</small>
         <label for="id_page">Choisir une page</label><br>
@@ -171,8 +171,8 @@ require_once '../inc/backheader.inc.php';
         <select id="id_media_type" name="id_media_type">
             <option value="<?= $media['id_media_type'] ?? ''; ?>"> --Choisir un type-- </option>
             <?php
-            foreach ($media_types as $media_type) { 
-                
+            foreach ($media_types as $media_type) {
+
                 echo "<option class='id_media_type' value='$media_type[id_media_type]'  >$media_type[title_media_type]</option>";
             }
             ?>
