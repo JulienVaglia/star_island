@@ -1,129 +1,118 @@
-<?php require_once '../config/function.php';
+<?php
+require_once '../config/function.php';
 
 $errors = array();
 
-if ((!empty($_POST) && !empty($_FILES)) || (!empty($_POST['lien_media']))) {
+if (!empty($_POST)) {
 
-    if (empty($_POST['id_page'])) {
-        $errors[] = 'Choix de la page obligatoire';
+    if (empty($_POST['title_event'])) {
+        $errors[] = 'Titre obligatoire';
     }
 
-    if (empty($_POST['title_media'])) {
-        $errors[] = 'Nom du média obligatoire';
+    if (empty($_POST['description_event'])) {
+        $errors[] = 'Description obligatoire';
     }
 
-    if (empty($_POST['id_media_type'])) {
-        $errors[] = 'Choix du type de média obligatoire';
+    if (empty($_POST['date_debut']) || empty($_POST['date_fin'])) {
+        $errors[] = 'Dates obligatoires';
     }
 
-    if (empty($_FILES['image']['name']) && empty($_POST['lien_media'])) {
+    if (empty($_FILES['image_event']['name'])) {
         $errors[] = 'Choix du fichier obligatoire';
     }
 
     if (empty($errors)) {
 
-        // récuperation du media_type selectionné
-        $mt = execute("SELECT * FROM media_type WHERE id_media_type='$_POST[id_media_type]'")->fetch();
 
-        if (!file_exists('media-upload/')) {
-            mkdir('media-upload/', 777);
-        }
+// INSERTION
 
-        // Créer des sous dossiers en fonction du type média
-        if (!file_exists('media-upload/' . $mt['title_media_type'])) {
-            mkdir('media-upload/' . $mt['title_media_type'], 777);
-        }
+        $titre = $_POST['title_event'];
+        $description = $_POST['description_event'];
+        $image = uniqid() . date_format(new DateTime(), 'd_m_Y_H_i_s') . '_' . $_FILES['image_event']['name'];
 
+        copy($_FILES['image_event']['tmp_name'], 'media-upload/image_event/' . $image);
 
-        if (!empty($_POST['lien_media'])) {
-            // debug($_POST);
-            // die();
-            $titre_du_media = $_POST['lien_media'];
-            $alt_du_media = $_POST['title_media'];
-        } else {
+        $idMt = 15;
 
-            $titre_du_media = uniqid() . date_format(new DateTime(), 'd_m_Y_H_i_s') . '_' . $_FILES['image']['name'];
-            $alt_du_media = $_POST['title_media'];
+        $start_date_event = $_POST['date_debut'];
+        $end_date_event = $_POST['date_fin'];
 
-            copy($_FILES['image']['tmp_name'], 'media-upload/' . $mt['title_media_type'] . '/' . $titre_du_media);
-        }
+        // Insertion dans la table Event
+        $eventId = execute("INSERT INTO event (start_date_event, end_date_event) VALUES (:start_date_event, :end_date_event)", array(
+            ':start_date_event' => $start_date_event,
+            ':end_date_event' => $end_date_event
+        ), true);
 
-        //Fin de création de sous dossier
-
-        execute("INSERT INTO media (id_page, title_media, name_media, id_media_type) VALUES (:id_page, :title_media, :name_media, :id_media_type)", array(
-            ':id_page' => $_POST['id_page'],
-            ':title_media' => $alt_du_media,
-            ':name_media' => $titre_du_media,
-            ':id_media_type' => $_POST['id_media_type']
+        // Insertion dans la table Média
+        $mediaId = execute("INSERT INTO media (title_media, id_media_type) VALUES (:title_media, :id_media_type)", array(
+            ':title_media' => $image,
+            ':id_media_type' => $idMt
         ));
 
-        $_SESSION['messages']['success'][] = 'Média ajouté';
-        header('location:./media.php');
-        exit();
-    } // fin soumission en insert
-
-    
-    else {
-
-        execute("UPDATE media SET title_media=:title WHERE id_media=:id", array(
-            ':id' => $_POST['id_media'],
-            ':title' => $_POST['title_media']
-        )); 
-
-        execute("UPDATE media SET name_media=:title WHERE id_media=:id", array(
-            ':id' => $_POST['id_media'],
-            ':name' => $_POST['name_media']
+        // Insertion table intermédiaire event_media
+        execute("INSERT INTO event_media (id_event, id_media) VALUES (:id_event, :id_media)", array(
+            ':id_event' => $eventId,
+            ':id_media' => $mediaId
         ));
 
-        $_SESSION['messages']['success'][] = 'Lien modifié';
-        header('location:./media.php');
+        //Insertion dans la table Content
+        $contentId = execute("INSERT INTO content (title_content, description_content) VALUES (:title_content, :description_content)", array(
+            ':title_content' => $titre,
+            ':description_content' => $description
+        ));
+
+        // Insertion table intermédiaire event_content
+        execute("INSERT INTO event_content (id_event, id_content) VALUES (:id_event, :id_content)", array(
+            ':id_event' => $eventId,
+            ':id_content' => $contentId
+        ));
+
+        $_SESSION['messages']['success'][] = 'Event ajouté';
+        header('location:./team.php');
         exit();
-    } // fin soumission modification
-} // fin si pas d'erreur
-
-// fin !empty $_POST
-
-//Liaison des tables media_type et page avec la table media
-$medias = execute("SELECT m.*, p.*, mt.* FROM media m INNER JOIN page p ON m.id_page = p.id_page INNER JOIN media_type mt ON m.id_media_type = mt.id_media_type")->fetchAll(PDO::FETCH_ASSOC);
-
-if (!empty($_GET) && isset($_GET['id']) && isset($_GET['a']) && $_GET['a'] == 'edit') {
-
-    $media = execute("SELECT * FROM media WHERE id_media=:id", array(
-        ':id' => $_GET['id']
-    ))->fetch(PDO::FETCH_ASSOC);
+    }
 }
 
+//FIN INSERTION
+
+// SUPRESSION
 if (!empty($_GET) && isset($_GET['id']) && isset($_GET['a']) && $_GET['a'] == 'del') {
 
+    $teamId = $_GET['id'];
+    $fileName = execute("SELECT *
+    FROM team t
+    JOIN team_media tm ON t.id_team = tm.id_team
+    JOIN media m ON tm.id_media = m.id_media
+    JOIN media_type mt ON m.id_media_type = mt.id_media_type
+    WHERE t.id_team=:id_team AND mt.title_media_type=:title_media_type", array(
+        ':id_team' => $_GET['id'],
+        ':title_media_type' => 'avatar_team'
+    ))->fetch(PDO::FETCH_ASSOC);
+    debug($fileName);
+    $file_path = "./media-upload/avatar_team/" . $fileName['name_media'];
 
-    $file_path = execute("SELECT m.*, mt.* FROM media m INNER JOIN media_type mt ON m.id_media_type = mt.id_media_type WHERE id_media=$_GET[id]")->fetch();
 
-    $success_database = false;
 
-    if ($file_path['title_media_type'] === "lien") {
-        $success_arborescence = true;
-    } else {
-        // création du unlink pour suppression du fichier du dossier media/upload
+    // Supprimer les enregistrements dans la table "team_media" liés à l'équipe
+    execute("DELETE FROM team_media WHERE id_team = :teamId", array(':teamId' => $teamId));
 
-        $file_path = "media-upload/$file_path[title_media_type]/$file_path[name_media]";
+    // Supprimer les enregistrements dans la table "media" liés à l'équipe
+    execute("DELETE FROM media WHERE id_media IN (SELECT id_media FROM team_media WHERE id_team = :teamId)", array(':teamId' => $teamId));
 
-        $success_arborescence = unlink($file_path);
-    }
+    // Supprimer le profil de la table "team"
+    $success_database = execute("DELETE FROM team WHERE id_team = :teamId", array(':teamId' => $teamId));
 
-    if ($success_arborescence) {
-        $success_database = execute("DELETE FROM media WHERE id_media=:id", array(
-            ':id' => $_GET['id']
+    // Supprimer le profil de l'arborescence
+    $success_arborescence = unlink($file_path);
 
-        ));
-    }
 
-    if ($success_database) {
-        $_SESSION['messages']['success'][] = 'Contenu supprimé';
-        header('location:./media.php');
+    if ($success_database && $success_arborescence) {
+        $_SESSION['messages']['success'][] = 'Profil supprimé';
+        header('location:./team.php');
         exit;
     } else {
         $_SESSION['messages']['danger'][] = 'Problème de traitement, veuillez réitérer';
-        header('location:./media.php');
+        header('location:./team.php');
         exit;
     }
 }
@@ -131,157 +120,133 @@ if (!empty($_GET) && isset($_GET['id']) && isset($_GET['a']) && $_GET['a'] == 'd
 require_once '../inc/backheader.inc.php';
 ?>
 
-<!-- Formulaires -->
-<form action="" method="post" enctype="multipart/form-data" class="w-75 mx-auto mt-5 mb-5">
-
-    <!-- Choix de page -->
-    <?php
-    $pages = execute("SELECT * FROM page")->fetchAll(PDO::FETCH_ASSOC);
-
-    //Liste des pages à exclure du choix
-    $pages_exclues = array('Serveur');
-
-    ?>
-    <div class="form-group mx-auto">
-        <small class="text-danger">*</small>
-        <label for="id_page">Choisir une page</label><br>
-        <select name="id_page">
-            <option id="id_page" value="<?= $media['id_page'] ?? ''; ?>"> --Choisir une page-- </option>
-            <?php
-            foreach ($pages as $page) {
-                if (!in_array($page['title_page'], $pages_exclues)) {
-                    echo "<option value='$page[id_page]'>$page[title_page]</option>";
-                }
-            }
-            ?>
-        </select><br>
-        <small class="text-danger"><?= isset($errors['id_page']) ? $errors['id_page'] : ''; ?></small>
-    </div>
-
-    <!-- Nom du média -->
-    <div class="form-group">
-        <small class="text-danger">*</small>
-        <label for="title_media" class="form-label mt-3">Nom/description du média ( attention de mettre un nom le plus explicite et court possible )</label>
-        <input name="title_media" id="title_media" placeholder="Entrez le nom ici" type="text" value="<?= $media['title_media'] ?? ''; ?>" class="form-control">
-        <small class="text-danger"><?= isset($errors['title_media']) ? $errors['title_media'] : ''; ?></small>
-    </div>
-
-    <!-- Type de média -->
-    <?php
-    $media_types = execute("SELECT * FROM media_type")->fetchAll(PDO::FETCH_ASSOC);
-    ?>
-    <div class="form-group mx-auto">
-        <small class="text-danger">*</small>
-        <label for="id_media_type" class="mt-3">Choisir un type de média</label><br>
-        <select id="id_media_type" name="id_media_type">
-            <option value="<?= $media['id_media_type'] ?? ''; ?>"> --Choisir un type-- </option>
-            <?php
-            foreach ($media_types as $media_type) {
-                echo "<option class='id_media_type' value='$media_type[id_media_type]'>$media_type[title_media_type]</option>";
-            }
-            ?>
-        </select><br>
-        <small class="text-danger"><?= isset($errors['id_media_type']) ? $errors['id_media_type'] : ''; ?></small><br>
-    </div>
-
-    <!-- File du média -->
-    <div class="form-group" id="image" style="display: none;">
-        <small class="text-danger">*</small>
-        <label for="image" class="form-label">Sélectionnez un fichier :</label><br>
-        <input type="file" name="image" class="file-input"><br>
-        <small class="text-danger"><?= isset($errors['image']) ? $errors['image'] : ''; ?></small>
-    </div>
-
-    <!-- Lien du média (pour les types de média "lien") -->
-    <div class="form-group" id="lien_media" style="display: none;">
-        <small class="text-danger">*</small>
-        <label for="lien_media" class="form-label">Entrez le lien :</label><br>
-        <input type="text" name="lien_media" placeholder="Entrez le lien ici" value="<?= $media['lien_media'] ?? ''; ?>" class="form-control">
-        <small class="text-danger"><?= isset($errors['lien_media']) ? $errors['lien_media'] : ''; ?></small>
-    </div>
 
 
+<div class="container event pb-4 w-50 rounded">
+    <!-- Formulaires -->
+    <form action="" method="post" enctype="multipart/form-data" class="w-100  pb-2 form-container">
 
-    <input type="hidden" name="id_media" value="<?= $media['id_media'] ?? ''; ?>">
-    <input type="hidden" name="media_type" value="<?= $media['title_media_type'] ?? ''; ?>">
 
-    <button type="submit" class="btn btn-primary mt-2 mx-auto">Valider</button>
-</form>
+        <!-- Titre -->
+        <div class="form-group mb-4">
+            <small class="text-danger">*</small>
+            <label for="title_event" class="form-label mt-3">Titre de l'EVENT</label>
+            <input name="title_event" id="title_event" placeholder="Entrez le nom ici" type="text" value="<?= $event['title_event'] ?? ''; ?>" class="form-control">
+            <small class="text-danger"><?= isset($errors['title_event']) ? $errors['title_event'] : ''; ?></small>
+        </div>
+
+        <!-- Description -->
+        <div class="form-group">
+
+            <small class="text-danger">*</small>
+            <label for="description_event" class="form-label">Description</label>
+            <textarea rows="5" name="description_event" id="description_event" placeholder="Entrez votre description ici" value="<?= $event['description_event'] ?? ''; ?>" class="form-control w-100"></textarea>
+            <small class="text-danger"><?= isset($errors['description_event']) ? $errors['description_event'] : ''; ?></small>
+
+        </div>
+
+        <!-- Dates -->
+        <div action="traitement.php" method="post" class="mt-3">
+            <small class="text-danger">*</small>
+            <label for="date_debut">Date de début :</label>
+            <input type="date" id="date_debut" name="date_debut" class="mr-5" value="<?= $event['date_debut'] ?? ''; ?>">
+            <small class="text-danger"><?= isset($errors['date_debut']) ? $errors['date_debut'] : ''; ?></small>
+
+            <small class="text-danger">*</small>
+            <label for="date_fin">Date de fin :</label>
+            <input type="date" id="date_fin" name="date_fin" value="<?= $event['date_fin'] ?? ''; ?>">
+            <small class="text-danger"><?= isset($errors['date_fin']) ? $errors['date_fin'] : ''; ?></small>
+
+        </div>
+
+
+        <!-- Photo -->
+        <div class="form-group mt-3 mb-3" id="image_event">
+            <small class="text-danger">*</small>
+            <label for="image_event" class="form-label mt-4">Sélectionnez une image :</label><br>
+            <input type="file" name="image_event" class="file-input"><br>
+            <small class="text-danger"><?= isset($errors['image_event']) ? $errors['image_event'] : ''; ?></small>
+        </div>
+
+        <br>
+
+        <button type="submit" class="mt-3 ms-5 btn btn-primary w-100">Créer l'EVENT</button>
+
+    </form>
+    <!-- Fin Formulaires -->
+
+</div>
+
+<input type="hidden" name="title_event" value="<?= $event['title_event'] ?? ''; ?>">
+<input type="hidden" name="date_debut" value="<?= $event['description_event'] ?? ''; ?>">
+<input type="hidden" name="date_debut" value="<?= $event['date_debut'] ?? ''; ?>">
+<input type="hidden" name="date_fin" value="<?= $event['date_fin'] ?? ''; ?>">
+
+
 
 <!-- Tableau récapitulatif -->
-<table class="table table-dark table-striped w-75 mx-auto">
+<table class="table mt-5 table-dark table-striped w-75 mx-auto">
     <thead>
         <tr>
-            <th class="w-25">Page</th>
-            <th class="text-center tri w-25" data-column="type-media">Type de média
-                <i class="fas fa-sort tri-icon"></i>
-                <div class="dropdown">
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#" data-sort="asc">Trier par ordre croissant</a></li>
-                        <li><a class="dropdown-item" href="#" data-sort="desc">Trier par ordre décroissant</a></li>
-                    </ul>
-                </div>
-            </th>
-            <th class="text-center tri w-25" data-column="nom-media">Nom du média
-                <i class="fas fa-sort tri-icon"></i>
-                <div class="dropdown">
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#" data-sort="asc">Trier par ordre croissant</a></li>
-                        <li><a class="dropdown-item" href="#" data-sort="desc">Trier par ordre décroissant</a></li>
-                    </ul>
-                </div>
-            </th>
-            <th class="text-center w-50">Aperçu</th>
+
+            <th class="text-center tri w-25" data-column="nickname-team">Titre</th>
+
+            <th class="text-center tri w-25" data-column="role-team">Dates</th>
+
+            <th class="text-center tri w-25" data-column="reseaux-team">Photo</th>
+
+            <th class="text-center w-25">Titre et description</th>
+
             <th class="text-center w-25">Actions</th>
         </tr>
     </thead>
     <tbody>
-        <?php foreach ($medias as $media) :
-            if ($media['title_page'] !== 'Serveur') { ?>
-                <tr>
+        <tr>
+            <td class="text-center tri nickname-team"></td>
+            <td class="text-center tri role-team"></td>
+            <td class="text-center tri reseaux-team"></td>
+            <td class="text-center apercu"></td>
 
-                    <td><?= $media['title_page']; ?></td>
-                    <td class="text-center tri type-media"><?= $media['title_media_type']; ?></td>
-                    <td class="text-center tri nom-media"><?= $media['title_media']; ?></td>
-
-                    <?php if ($media['title_media_type'] === 'lien') { ?>
-                        <td class="text-center">
-                            <?= $media['name_media'] ?>
-                        </td>
-                    <?php } else { ?>
-                        <td class="text-center">
-                            <img src="media-upload/<?= $media['title_media_type'] ?>/<?= $media['name_media'] ?>" alt="<?= $media['title_media'] ?>" width="70" height="70" class="media-preview" data-src="media-upload/<?= $media['title_media_type'] ?>/<?= $media['name_media'] ?>">
-                        </td>
-                    <?php } ?>
-
-                    <?php
+            <!-- Btn Modifier -->
+            <td>
+                <a href="?id=<?= $profil['id_team']; ?>&a=edit" class="btn btn-outline-info">Modifier</a>
+            </td>
 
 
-                    if ($media['title_media_type'] == 'lien') { ?>
-                        <td>
-                            <a href="?id=<?= $media['id_media']; ?>&a=edit" class="btn btn-outline-info">Modifier</a>
-                        </td>
-
-                    <?php } else {
-                        echo '<td></td>';
-                    }  ?>
-
-                    <td class="text-center">
-                        <a href="?id=<?= $media['id_media']; ?>&a=del" onclick="return confirm('Etes-vous sûr?')" class="btn btn-outline-danger">Supprimer</a>
-                    </td>
-                </tr>
-        <?php }
-        endforeach; ?>
+            <!-- Btn Supprimer  -->
+            <td class="text-center">
+                <a href="?id=<?= $profil['id_team']; ?>&a=del" onclick="return confirm('Êtes-vous sûr(e) ?')" class="btn btn-outline-danger">Supprimer</a>
+            </td>
+        </tr>
     </tbody>
 </table>
 
-
-
 <!-- CSS -->
-
-
-<!-- CSS : apercu plein écran -->
 <style>
+    .event {
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    }
+
+    .preview-container {
+        width: 40%;
+    }
+
+    ::placeholder {
+        padding-left: 0.5vw;
+        margin-bottom: 0.5vh;
+    }
+
+    label img {
+        width: 1.5vw;
+        height: auto;
+    }
+
+    .apercu img {
+        width: 5vw;
+        height: auto;
+    }
+
+    /* CSS : apercu plein écran  */
     .preview-modal {
         position: fixed;
         top: 0;
@@ -300,141 +265,3 @@ require_once '../inc/backheader.inc.php';
         max-height: 90%;
     }
 </style>
-
-
-<!-- SCRIPT -->
-
-
-<!-- JS : Au clic sur la photo => affichage plein ecran / si click hors photo l'apercu se ferme -->
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var mediaPreviews = document.getElementsByClassName('media-preview');
-
-        for (var i = 0; i < mediaPreviews.length; i++) {
-            mediaPreviews[i].addEventListener('click', function() {
-                var src = this.getAttribute('data-src');
-                var previewModal = document.createElement('div');
-                previewModal.className = 'preview-modal';
-                previewModal.innerHTML = '<img src="' + src + '">';
-
-                document.body.appendChild(previewModal);
-            });
-        }
-
-        document.addEventListener('click', function(e) {
-            if (e.target.classList.contains('preview-modal')) {
-                e.target.parentNode.removeChild(e.target);
-            }
-        });
-    });
-</script>
-
-
-<!-- Input en fonction du média type choisi -->
-<script>
-    // Ciblage de la div choix du media_type
-    let select = document.getElementById('id_media_type');
-
-    //Ciblage de la div insertion file
-    let file_input = document.getElementById('image');
-
-    //Ciblage de la div insertion lien
-    let lien_input = document.getElementById('lien_media');
-
-
-    select.addEventListener("change", function() {
-        console.log(select.options[select.selectedIndex].text);
-
-
-        let media_type = select.options[select.selectedIndex].text;
-        console.log(media_type);
-
-        file_input.style.display = 'none';
-        lien_input.style.display = 'none';
-
-        //affichage des input en fonction du choix media_type
-        if (media_type === '--Choisir un type--') {
-            lien_input.style.display = 'none';
-            file_input.style.display = 'none';
-        } else if (media_type === 'lien') {
-            lien_input.style.display = 'block';
-        } else {
-            file_input.style.display = 'block';
-        }
-
-    })
-</script>
-
-<!-- Possibilité de tri du tableau récap par thême -->
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        let triHeaders = document.querySelectorAll('.tri');
-
-        for (var i = 0; i < triHeaders.length; i++) {
-            let column = triHeaders[i].getAttribute('data-column');
-            let sortIcon = triHeaders[i].querySelector('.tri-icon');
-            let dropdownMenu = triHeaders[i].querySelector('.dropdown-menu');
-
-            sortIcon.addEventListener('click', function(e) {
-                e.stopPropagation();
-                dropdownMenu.style.display = 'block';
-            });
-
-            dropdownMenu.addEventListener('click', function(event) {
-                event.stopPropagation();
-            });
-
-            dropdownMenu.addEventListener('mouseleave', function() {
-                dropdownMenu.style.display = 'none';
-            });
-
-            let dropdownItems = dropdownMenu.querySelectorAll('.dropdown-item');
-            for (var j = 0; j < dropdownItems.length; j++) {
-                dropdownItems[j].addEventListener('click', function() {
-                    let sortType = this.getAttribute('data-sort');
-                    dropdownMenu.style.display = 'none';
-                    sortTable(column, sortType);
-                });
-            }
-        }
-
-        function sortTable(column, sortType) {
-            var table = document.getElementsByTagName('table')[0];
-            var rows = Array.from(table.getElementsByTagName('tr')).slice(1);
-
-            rows.sort(function(a, b) {
-                var cellA = a.querySelector('td.' + column);
-                var cellB = b.querySelector('td.' + column);
-
-                if (cellA && cellB) {
-                    var valueA = cellA.textContent.toLowerCase();
-                    var valueB = cellB.textContent.toLowerCase();
-
-                    if (valueA < valueB) {
-                        return sortType === 'asc' ? -1 : 1;
-                    } else if (valueA > valueB) {
-                        return sortType === 'asc' ? 1 : -1;
-                    } else {
-                        return 0;
-                    }
-                } else {
-                    return 0;
-                }
-            });
-
-            for (var i = 0; i < rows.length; i++) {
-                table.tBodies[0].appendChild(rows[i]);
-            }
-
-            // Mettre à jour l'icône de tri
-            var sortIconClass = sortType === 'asc' ? 'fa-sort-up' : 'fa-sort-down';
-            for (var i = 0; i < triHeaders.length; i++) {
-                let currentSortIcon = triHeaders[i].querySelector('.tri-icon');
-                currentSortIcon.classList.remove('fa-sort-up', 'fa-sort-down');
-            }
-            sortIcon.classList.add(sortIconClass);
-        }
-    });
-</script>
-
-<?php require_once '../inc/backfooter.inc.php'; ?>

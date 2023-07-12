@@ -142,8 +142,6 @@ $profils = execute(
     "SELECT DISTINCT team.id_team, team.nickname_team, team.role_team
         FROM team"
 )->fetchAll(PDO::FETCH_ASSOC);
-
-// debug($profils);
 ?>
 
 
@@ -255,31 +253,7 @@ $profils = execute(
             <img src="../assets/img/ellios.png" alt="">
             <h4 class="text-center">Keyser Soze</h4>
         </div>
-        <style>
-            .img_ligne1 {
-                position: relative;
-                top: 5vh;
-                width: 15vw;
-            }
 
-            h4 {
-                position: relative;
-                bottom: 12vh;
-                font-size: 25px;
-                color: white;
-                text-shadow: 1px 0 0 rgb(0, 0, 0), 1px 1px 0 rgb(0, 0, 0), 0 1px 0 rgb(0, 0, 0), -1px 1px 0 rgb(0, 0, 0), -1px 0 0 rgb(0, 0, 0), -1px -1px 0 rgb(0, 0, 0), 0 -1px 0 rgb(0, 0, 0), 1px -1px 0 rgb(0, 0, 0);
-            }
-
-            h2 {
-                text-align: center;
-            }
-
-            .img_ligne1 img {
-                -webkit-clip-path: polygon(50% 0%, 91% 75%, 50% 100%, 9% 75%);
-                clip-path: polygon(50% 0%, 91% 75%, 50% 100%, 9% 75%);
-                width: 15vw;
-            }
-        </style>
     </div>
     <!-- Fin Apercu -->
 
@@ -317,19 +291,16 @@ $profils = execute(
         JOIN media m ON tm.id_media = m.id_media
         JOIN media_type mt ON m.id_media_type = mt.id_media_type
         WHERE t.id_team = :id_team AND mt.title_media_type='lien'", array(':id_team' => $id_team))->fetchAll(PDO::FETCH_ASSOC);
-            // debug($reseaux);
+
             $reseauxHtml = '';
             $reseauxFinal = '';
             foreach ($reseaux as $reseau) {
 
                 $reseauxHtml .= $reseau['title_media'];
-
                 $names_reseau = explode(',', $reseau['title_media']);
                 $lien = explode('-', $reseau['title_media']);
 
                 foreach ($names_reseau as $index => $name_reseau) {
-                    // debug($lien);
-
                     $reseauxFinal .= $lien[1] . ' <br> ';
                 }
             }
@@ -353,19 +324,11 @@ $profils = execute(
                     ))->fetch(PDO::FETCH_ASSOC);
 
                     if ($avatar['id_media_type'] == 14) {
-                        // if (strpos($avatar['name_media'], 'avatar_random') !== false) {
-                            echo "<img class='media-preview' src='media-upload/avatar_random/{$avatar['name_media']}' alt='prout'>";
-                        } else {
-                            echo "<img class='media-preview' src='media-upload/avatar_team/{$avatar['name_media']}' alt='Avatar'>";
-                        // }
+                        echo "<img class='media-preview' src='media-upload/avatar_random/{$avatar['name_media']}' alt='prout'>";
+                    } else {
+                        echo "<img class='media-preview' src='media-upload/avatar_team/{$avatar['name_media']}' alt='Avatar'>";
                     }
 
-                    //     if ($avatar) {
-                    //         echo '<img class="media-preview" src="media-upload/avatar_team/' . $avatar['name_media'] . '" alt="Avatar">';
-                    //     }
-                    // else {
-                    //     echo '<img class="media-preview" src="media-upload/avatar_random/' . $avatar['name_media'] . '" alt="Avatar">';
-                    // }
                     ?>
                 </td>
 
@@ -479,10 +442,6 @@ $profils = execute(
     }
 </script>
 
-
-
-
-
 <!-- CSS -->
 <style>
     .team {
@@ -558,6 +517,30 @@ $profils = execute(
     .preview-modal img {
         max-width: 90%;
         max-height: 90%;
+    }
+
+    .img_ligne1 {
+        position: relative;
+        top: 5vh;
+        width: 15vw;
+    }
+
+    h4 {
+        position: relative;
+        bottom: 12vh;
+        font-size: 25px;
+        color: white;
+        text-shadow: 1px 0 0 rgb(0, 0, 0), 1px 1px 0 rgb(0, 0, 0), 0 1px 0 rgb(0, 0, 0), -1px 1px 0 rgb(0, 0, 0), -1px 0 0 rgb(0, 0, 0), -1px -1px 0 rgb(0, 0, 0), 0 -1px 0 rgb(0, 0, 0), 1px -1px 0 rgb(0, 0, 0);
+    }
+
+    h2 {
+        text-align: center;
+    }
+
+    .img_ligne1 img {
+        -webkit-clip-path: polygon(50% 0%, 91% 75%, 50% 100%, 9% 75%);
+        clip-path: polygon(50% 0%, 91% 75%, 50% 100%, 9% 75%);
+        width: 15vw;
     }
 </style>
 
