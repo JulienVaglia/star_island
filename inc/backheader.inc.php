@@ -54,9 +54,9 @@
 
         <!-- Heading -->
         <div class="sidebar-heading">
-            gestion
+            Menu
         </div>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                aria-expanded="true" aria-controls="collapseUtilities">
                 <i class="fas fa-fw fa-wrench"></i>
@@ -68,7 +68,7 @@
                     <a class="dropdown-item" href="">Gestion Commande</a>
                 </div>
             </div>
-        </li>
+        </li> -->
 
         <hr class="sidebar-divider d-none d-md-block">
 
@@ -139,26 +139,26 @@
 
 
 
-        <!-- Nav Item - Pages Collapse Menu -->
+        <!-- Nav Item - Pages Collapse Menu
         <li class="nav-item ">
             <a class="nav-link collapsed" href="" >
                 <i class="fas fa-fw fa-folder"></i>
                 <span>Gestion abonnés</span>
             </a>
-<!--            <div id="collapsePages" class="collapse show" aria-labelledby="headingPages"-->
-<!--                 data-parent="#accordionSidebar">-->
-<!--                <div class="bg-white py-2 collapse-inner rounded">-->
-<!--                    <h6 class="collapse-header">Login Screens:</h6>-->
-<!--                    <a class="collapse-item" href="{{path('app_admin_crud_newsletter_new')}}">Gestion Newsletter</a>-->
-<!--                    <a class="collapse-item" href="{{path('app_admin_crud_membre')}}">Gestion Membre</a>-->
-<!--                    <a class="collapse-item" href="{{path('app_admin_crud_avis')}}">Gestion Avis</a>-->
-<!--                    <a class="collapse-item" href="{{path('app_admin_crud_contact')}}">Gestion Contact</a>-->
-<!--                    <div class="collapse-divider"></div>-->
-<!--                    <h6 class="collapse-header">autres:</h6>-->
-<!--                    <a class="collapse-item active" href="{{path('admin_crud_slider_new')}}">Gestion slider</a>-->
-<!--                </div>-->
-<!--            </div>-->
-        </li>
+           <div id="collapsePages" class="collapse show" aria-labelledby="headingPages"
+                 data-parent="#accordionSidebar">
+               <div class="bg-white py-2 collapse-inner rounded">
+                   <h6 class="collapse-header">Login Screens:</h6>
+                   <a class="collapse-item" href="{{path('app_admin_crud_newsletter_new')}}">Gestion Newsletter</a>
+                   <a class="collapse-item" href="{{path('app_admin_crud_membre')}}">Gestion Membre</a>
+                   <a class="collapse-item" href="{{path('app_admin_crud_avis')}}">Gestion Avis</a>
+                   <a class="collapse-item" href="{{path('app_admin_crud_contact')}}">Gestion Contact</a>
+                   <div class="collapse-divider"></div>
+                   <h6 class="collapse-header">autres:</h6>
+                   <a class="collapse-item active" href="{{path('admin_crud_slider_new')}}">Gestion slider</a>
+               </div>
+
+        </li> -->
 
 
 

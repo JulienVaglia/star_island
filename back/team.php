@@ -42,31 +42,18 @@ if (!empty($_POST)) {
             $idMt = 13;
         } else {
 
+
+
+            $avatars = array_diff(scandir("./media-upload/avatar_random"), array('..', '.'));
+            $randomIndex = array_rand($avatars, 1);
+
+            $chemin  = $avatars[$randomIndex];
+
             $idMt = 14;
+        }
+        //  fin avatar
 
-            $avatars = execute(
-                "SELECT * 
-                FROM media m 
-                INNER JOIN media_type mt
-                ON m.id_media_type = mt.id_media_type       
-                WHERE title_media_type = 'avatar' "
-            )->fetchAll();
-
-            $randomIndex = array_rand($avatars);
-
-
-            if (!file_exists('media-upload/avatar_team')) {
-                mkdir('media-upload/avatar_team', 777);
-            }
-
-            // random de $avatars(array)
-            $chemin = uniqid() . date_format(new DateTime(), 'd_m_Y_H_i_s') . '_' . $avatars[$randomIndex]['name_media'];
-
-
-            copy('media-upload/avatar/' . $avatars[$randomIndex]['name_media'], 'media-upload/avatar_team/'  . $chemin);
-        } //  fin avatar
-
-        $mediaId =  execute("INSERT INTO media ( title_media, name_media, id_media_type) VALUES (:title_media, :name_media, :id_media_type)", array(
+        $mediaId = execute("INSERT INTO media (title_media, name_media, id_media_type) VALUES (:title_media, :name_media, :id_media_type)", array(
             ':title_media' => 'avatar-' . $_POST['nickname_team'],
             ':name_media' => $chemin,
             ':id_media_type' => $idMt
@@ -117,11 +104,11 @@ if (!empty($_GET) && isset($_GET['id']) && isset($_GET['a']) && $_GET['a'] == 'd
     JOIN media_type mt ON m.id_media_type = mt.id_media_type
     WHERE t.id_team=:id_team AND mt.title_media_type=:title_media_type", array(
         ':id_team' => $_GET['id'],
-        ':title_media_type' =>'avatar_team'
-        ))->fetch(PDO::FETCH_ASSOC);
-        debug($fileName);
-    $file_path = "./media-upload/avatar_team/".$fileName['name_media'] ;
-    // debug($file_path);die();
+        ':title_media_type' => 'avatar_team'
+    ))->fetch(PDO::FETCH_ASSOC);
+    debug($fileName);
+    $file_path = "./media-upload/avatar_team/" . $fileName['name_media'];
+
 
 
     // Supprimer les enregistrements dans la table "team_media" liés à l'équipe
@@ -322,7 +309,7 @@ $profils = execute(
     <tbody>
         <?php foreach ($profils as $profil) : ?>
             <?php
-            // debug($profil); die;
+
             $id_team = $profil['id_team'];
             $reseaux = execute("SELECT mt.*, m.*
         FROM team t
@@ -355,23 +342,32 @@ $profils = execute(
                 <td class="text-center tri reseaux-team"><?= $reseauxFinal; ?></td>
                 <td class="text-center apercu">
                     <?php
-                    $avatar = execute("SELECT m.name_media
-        FROM team t
+                    $avatar = execute("SELECT * FROM team t
         JOIN team_media tm ON t.id_team = tm.id_team
         JOIN media m ON tm.id_media = m.id_media
         JOIN media_type mt ON m.id_media_type = mt.id_media_type
-        WHERE t.id_team = :id_team AND mt.title_media_type='avatar_team'", array(':id_team' => $id_team))->fetch(PDO::FETCH_ASSOC);
+        WHERE t.id_team = :id_team AND mt.title_media_type=:title_media_type OR mt.title_media_type=:title_media_type_other", array(
+                        ':id_team' => $id_team,
+                        ':title_media_type' => 'avatar_team',
+                        ':title_media_type_other' => 'avatar_random'
+                    ))->fetch(PDO::FETCH_ASSOC);
 
-
-
-                    if ($avatar) {
-                        echo '<img class="media-preview" src="media-upload/avatar_team/' . $avatar['name_media'] . '" alt="Avatar">';
+                    if ($avatar['id_media_type'] == 14) {
+                        // if (strpos($avatar['name_media'], 'avatar_random') !== false) {
+                            echo "<img class='media-preview' src='media-upload/avatar_random/{$avatar['name_media']}' alt='prout'>";
+                        } else {
+                            echo "<img class='media-preview' src='media-upload/avatar_team/{$avatar['name_media']}' alt='Avatar'>";
+                        // }
                     }
+
+                    //     if ($avatar) {
+                    //         echo '<img class="media-preview" src="media-upload/avatar_team/' . $avatar['name_media'] . '" alt="Avatar">';
+                    //     }
+                    // else {
+                    //     echo '<img class="media-preview" src="media-upload/avatar_random/' . $avatar['name_media'] . '" alt="Avatar">';
+                    // }
                     ?>
                 </td>
-
-
-
 
                 <!-- Btn Modifier -->
                 <!-- <td>
