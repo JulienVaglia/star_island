@@ -63,6 +63,8 @@ if (!empty($_POST)) {
             ':id_team' => $teamId,
             ':id_media' => $mediaId
         ));
+        debug($teamId);
+        debug($mediaId);
 
         $profils = execute("SELECT * FROM team")->fetchAll(PDO::FETCH_ASSOC);
 
@@ -106,7 +108,6 @@ if (!empty($_GET) && isset($_GET['id']) && isset($_GET['a']) && $_GET['a'] == 'd
         ':id_team' => $_GET['id'],
         ':title_media_type' => 'avatar_team'
     ))->fetch(PDO::FETCH_ASSOC);
-    debug($fileName);
     $file_path = "./media-upload/avatar_team/" . $fileName['name_media'];
 
 

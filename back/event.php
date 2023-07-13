@@ -24,7 +24,7 @@ if (!empty($_POST)) {
     if (empty($errors)) {
 
 
-// INSERTION
+        // INSERTION
 
         $titre = $_POST['title_event'];
         $description = $_POST['description_event'];
@@ -32,10 +32,16 @@ if (!empty($_POST)) {
 
         copy($_FILES['image_event']['tmp_name'], 'media-upload/image_event/' . $image);
 
-        $idMt = 15;
+        $idMt = execute("SELECT * FROM media_type WHERE id_media_type = 15")->fetch(PDO::FETCH_ASSOC);
 
         $start_date_event = $_POST['date_debut'];
         $end_date_event = $_POST['date_fin'];
+        $chemin = $idMt['title_media_type'];
+        $id_chemin = $idMt['id_media_type'];
+
+        debug($chemin);
+        debug($idMt);
+
 
         // Insertion dans la table Event
         $eventId = execute("INSERT INTO event (start_date_event, end_date_event) VALUES (:start_date_event, :end_date_event)", array(
@@ -44,10 +50,15 @@ if (!empty($_POST)) {
         ), true);
 
         // Insertion dans la table Média
-        $mediaId = execute("INSERT INTO media (title_media, id_media_type) VALUES (:title_media, :id_media_type)", array(
-            ':title_media' => $image,
-            ':id_media_type' => $idMt
-        ));
+        $mediaId = execute("INSERT INTO media (title_media, name_media, id_media_type) VALUES (:title_media, :name_media, :id_media_type)", array(
+            ':title_media' => $chemin,
+            ':name_media' => $image,
+            ':id_media_type' => $id_chemin
+
+        ), true);
+
+        debug($image);
+        debug($mediaId);
 
         // Insertion table intermédiaire event_media
         execute("INSERT INTO event_media (id_event, id_media) VALUES (:id_event, :id_media)", array(
@@ -59,7 +70,7 @@ if (!empty($_POST)) {
         $contentId = execute("INSERT INTO content (title_content, description_content) VALUES (:title_content, :description_content)", array(
             ':title_content' => $titre,
             ':description_content' => $description
-        ));
+        ), true);
 
         // Insertion table intermédiaire event_content
         execute("INSERT INTO event_content (id_event, id_content) VALUES (:id_event, :id_content)", array(
@@ -68,7 +79,7 @@ if (!empty($_POST)) {
         ));
 
         $_SESSION['messages']['success'][] = 'Event ajouté';
-        header('location:./team.php');
+        header('location:./event.php');
         exit();
     }
 }
@@ -78,29 +89,35 @@ if (!empty($_POST)) {
 // SUPRESSION
 if (!empty($_GET) && isset($_GET['id']) && isset($_GET['a']) && $_GET['a'] == 'del') {
 
-    $teamId = $_GET['id'];
+    $eventId = $_GET['id'];
     $fileName = execute("SELECT *
-    FROM team t
-    JOIN team_media tm ON t.id_team = tm.id_team
-    JOIN media m ON tm.id_media = m.id_media
-    JOIN media_type mt ON m.id_media_type = mt.id_media_type
-    WHERE t.id_team=:id_team AND mt.title_media_type=:title_media_type", array(
-        ':id_team' => $_GET['id'],
-        ':title_media_type' => 'avatar_team'
+    FROM event ev
+    JOIN event_media em ON ev.id_event = em.id_event
+    JOIN media m ON em.id_media = m.id_media
+    JOIN content ct ON m.id_content = ct.id_content
+    WHERE ev.id_event=:id_event AND mt.title_media_type=:title_media_type", array(
+        ':id_event' => $_GET['id'],
+        ':title_media_type' => 'avatar_event'
     ))->fetch(PDO::FETCH_ASSOC);
     debug($fileName);
-    $file_path = "./media-upload/avatar_team/" . $fileName['name_media'];
+    $file_path = "./media-upload/avatar_event/" . $fileName['name_media'];
 
 
+    // Supprimer les infos dans la table "event_media"
+    execute("DELETE FROM event_media WHERE id_event = :eventId", array(':eventId' => $eventId));
 
-    // Supprimer les enregistrements dans la table "team_media" liés à l'équipe
-    execute("DELETE FROM team_media WHERE id_team = :teamId", array(':teamId' => $teamId));
+    // Supprimer les infos dans la table "media"
+    execute("DELETE FROM media WHERE id_media IN (SELECT id_media FROM event_media WHERE id_event = :eventId)", array(':eventId' => $eventId));
 
-    // Supprimer les enregistrements dans la table "media" liés à l'équipe
-    execute("DELETE FROM media WHERE id_media IN (SELECT id_media FROM team_media WHERE id_team = :teamId)", array(':teamId' => $teamId));
+    // Supprimer les infos dans la table "event_content"
+    execute("DELETE FROM event_media WHERE id_event = :eventId", array(':eventId' => $eventId));
 
-    // Supprimer le profil de la table "team"
-    $success_database = execute("DELETE FROM team WHERE id_team = :teamId", array(':teamId' => $teamId));
+    // Supprimer les infos dans la table "content"
+    execute("DELETE FROM media WHERE id_media IN (SELECT id_media FROM event_media WHERE id_event = :eventId)", array(':eventId' => $eventId));
+
+    // Supprimer les infos de la table "event"
+    $success_database = execute("DELETE FROM event WHERE id_event = :eventId", array(':eventId' => $eventId));
+
 
     // Supprimer le profil de l'arborescence
     $success_arborescence = unlink($file_path);
@@ -108,11 +125,11 @@ if (!empty($_GET) && isset($_GET['id']) && isset($_GET['a']) && $_GET['a'] == 'd
 
     if ($success_database && $success_arborescence) {
         $_SESSION['messages']['success'][] = 'Profil supprimé';
-        header('location:./team.php');
+        header('location:./event.php');
         exit;
     } else {
         $_SESSION['messages']['danger'][] = 'Problème de traitement, veuillez réitérer';
-        header('location:./team.php');
+        header('location:./event.php');
         exit;
     }
 }
@@ -189,11 +206,11 @@ require_once '../inc/backheader.inc.php';
     <thead>
         <tr>
 
-            <th class="text-center tri w-25" data-column="nickname-team">Titre</th>
+            <th class="text-center tri w-25" data-column="nickname-event">Titre</th>
 
-            <th class="text-center tri w-25" data-column="role-team">Dates</th>
+            <th class="text-center tri w-25" data-column="role-event">Dates</th>
 
-            <th class="text-center tri w-25" data-column="reseaux-team">Photo</th>
+            <th class="text-center tri w-25" data-column="reseaux-event">Photo</th>
 
             <th class="text-center w-25">Titre et description</th>
 
@@ -202,20 +219,20 @@ require_once '../inc/backheader.inc.php';
     </thead>
     <tbody>
         <tr>
-            <td class="text-center tri nickname-team"></td>
-            <td class="text-center tri role-team"></td>
-            <td class="text-center tri reseaux-team"></td>
+            <td class="text-center tri nickname-event"></td>
+            <td class="text-center tri role-event"></td>
+            <td class="text-center tri reseaux-event"></td>
             <td class="text-center apercu"></td>
 
             <!-- Btn Modifier -->
             <td>
-                <a href="?id=<?= $profil['id_team']; ?>&a=edit" class="btn btn-outline-info">Modifier</a>
+                <a href="?id=<?= $profil['id_event']; ?>&a=edit" class="btn btn-outline-info">Modifier</a>
             </td>
 
 
             <!-- Btn Supprimer  -->
             <td class="text-center">
-                <a href="?id=<?= $profil['id_team']; ?>&a=del" onclick="return confirm('Êtes-vous sûr(e) ?')" class="btn btn-outline-danger">Supprimer</a>
+                <a href="?id=<?= $profil['id_event']; ?>&a=del" onclick="return confirm('Êtes-vous sûr(e) ?')" class="btn btn-outline-danger">Supprimer</a>
             </td>
         </tr>
     </tbody>
